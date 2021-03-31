@@ -80,7 +80,7 @@ public class GdxActivity extends AndroidApplication {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //View gdxView = initializeForView(gdxController, new AndroidApplicationConfiguration());
-        //FrameLayout container = findViewById(R.id.container_gdx);
+        FrameLayout container = findViewById(R.id.container_gdx);
         //container.addView(gdxView);
 
 

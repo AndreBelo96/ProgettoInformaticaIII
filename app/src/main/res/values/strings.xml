@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Kokoko</string>
+    <string name="app_name">AplicazioneDB</string>
+    <string name="username">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="Register">Non sei ancora iscritto? Iscriviti ora!</string>
+    <string name="registrati">Registrati!</string>
+    <string name="registrazione">Sign Up</string>
 </resources>
