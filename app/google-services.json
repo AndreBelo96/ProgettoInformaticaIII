@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1070227802878",
+    "project_id": "kokoko-34ea7",
+    "storage_bucket": "kokoko-34ea7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070227802878:android:5cf7c6ccbef8687722f3af",
+        "android_client_info": {
+          "package_name": "com.example.kokoko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070227802878-bal265rplgarg9294c10nt5e1854fgsu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAISlFFz8au42ij9gZi4DVaqGwBkL7KCmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070227802878-bal265rplgarg9294c10nt5e1854fgsu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
