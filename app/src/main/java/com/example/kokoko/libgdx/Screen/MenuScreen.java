@@ -23,7 +23,7 @@ public class MenuScreen extends Screens implements Screen {
     public GameClass gameClass;
     private Skin skin;
     private OrthographicCamera camera;
-    private TextButton playButton,exitButton;
+    private TextButton playButton,exitButton,optionButton;
     private Stage stage;
     private final Preferences prefs;
     private Texture title;
@@ -44,18 +44,18 @@ public class MenuScreen extends Screens implements Screen {
 
 
         playButton = new TextButton("Play",skin);
-
+        optionButton = new TextButton("Option", skin);
         exitButton = new TextButton(Constant.EXIT_TEXT,skin);
 
         playButton.getLabel().setFontScale(3);
-
+        optionButton.getLabel().setFontScale(3);
         exitButton.getLabel().setFontScale(3);
 
         stage = new Stage();
         stage.clear();
 
         playButton.setBounds(Gdx.graphics.getWidth()/2 - 200,Gdx.graphics.getHeight()/2 - 100,400,150); //TODO modifica questi numeri con costanti
-
+        optionButton.setBounds(Gdx.graphics.getWidth()/2 - 200,Gdx.graphics.getHeight()/2 - 250,400,150);
         exitButton.setBounds(Gdx.graphics.getWidth()/2 + 500,Gdx.graphics.getHeight()/2 - 500,400,150);
 
         playButton.addListener(new ClickListener() {
@@ -67,7 +67,14 @@ public class MenuScreen extends Screens implements Screen {
             }
         } );
 
+        optionButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gameClass.sScreen = 5;
+                gameClass.bSwitch = true;
 
+            }
+        });
 
         exitButton.addListener(new ClickListener() {
             @Override

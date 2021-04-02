@@ -10,6 +10,7 @@ import com.example.kokoko.android.activities.GdxActivity;
 import com.example.kokoko.libgdx.Screen.GameScreen;
 import com.example.kokoko.libgdx.Screen.LoseScreen;
 import com.example.kokoko.libgdx.Screen.MenuScreen;
+import com.example.kokoko.libgdx.Screen.OptionScreen;
 import com.example.kokoko.libgdx.Screen.WinScreen;
 
 public class GameClass extends ApplicationAdapter {
@@ -96,6 +97,9 @@ public class GameClass extends ApplicationAdapter {
         else if(sScreen == 4){
             sActualScreen = new LoseScreen(this);
         }
+        else if(sScreen == 5){
+            sActualScreen = new OptionScreen(this);
+        }
         bSwitch = false;
     }
 
@@ -128,6 +132,24 @@ public class GameClass extends ApplicationAdapter {
         GameClass.punteggio = punteggio;
     }
 
+    // Standard getter for the variable nickName
+    public static String getNickName() {
+        return nickName;
+    }
 
+    // Standard setter for the variable nickName
+    public static void setNickName(String nickName) {
+        GameClass.nickName = nickName;
+    }
+
+    // Getter for the boolean variable sound
+    public static boolean isSound() {
+        return sound;
+    }
+
+    // Setter for the boolean variable sound
+    public static void setSound(boolean sound) {
+        GameClass.sound = sound;
+    }
 
 }
