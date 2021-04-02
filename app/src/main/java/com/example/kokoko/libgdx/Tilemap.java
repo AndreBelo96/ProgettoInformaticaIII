@@ -2,8 +2,9 @@ package com.example.kokoko.libgdx;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.example.kokoko.Constant;
-
+import com.example.kokoko.libgdx.Screen.GameScreen;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,7 +80,13 @@ public class Tilemap {
                 float x = (row - col) * (Constant.TILE_SPOS_INIT_X);
                 float y = (col + row) * (Constant.TILE_SPOS_INIT_Y);
 
-
+                if(map[row][col].contains("1") && (GameScreen.getPlayer().getPos().x == row && GameScreen.getPlayer().getPos().y == col)){ //TODO cambiare il metodo di punteggio
+                    base.add(new Tile(new Vector2(row,col), new Vector2(x,y), true));
+                    punteggioTotale = punteggioTotale + Constant.PUNTEGGIO_PER_TILE;
+                }else if (map[row][col].contains("1")  && ((GameScreen.getPlayer().getPos().x != row || GameScreen.getPlayer().getPos().y != col))){
+                    base.add(new Tile(new Vector2(row,col), new Vector2(x,y), false));
+                    punteggioTotale = punteggioTotale + Constant.PUNTEGGIO_PER_TILE;
+                }
 
             }
         }

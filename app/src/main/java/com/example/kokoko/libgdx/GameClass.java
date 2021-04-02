@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.example.kokoko.android.activities.GdxActivity;
+import com.example.kokoko.libgdx.Screen.GameScreen;
 import com.example.kokoko.libgdx.Screen.MenuScreen;
 
 public class GameClass extends ApplicationAdapter {
@@ -83,9 +84,66 @@ public class GameClass extends ApplicationAdapter {
             sActualScreen = new MenuScreen(this);
             ga.updateUI(nLvlMax, punteggio,nickName);
         }
-
+        else if(sScreen == 1) {
+            sActualScreen = new GameScreen(this);
+            ga.updateUI(nLvlMax, punteggio,nickName);
+        }
+        else if(sScreen == 2) {
+            //sActualScreen = new WinScreen(this);
+        }
+        else if(sScreen == 4){
+            //sActualScreen = new LoseScreen(this);
+        }
         bSwitch = false;
     }
 
+    // Standard getter for the variable nLvlMax
+    public static int getnLvlMax() {
+        return nLvlMax;
+    }
+
+    // Standard getter for the variable nLvl
+    public static int getnLvl() {
+        return nLvl;
+    }
+
+    public static void setnLvl(int nLvl) {
+        GameClass.nLvl = nLvl;
+    }
+
+    // Standard setter for the variable nLvl
+    public static void setnLvlMax(int nLvlMax) {
+        GameClass.nLvlMax = nLvlMax;
+    }
+
+    // Standard getter for the variable punteggio
+    public static int getPunteggio() {
+        return punteggio;
+    }
+
+    // Standard setter for the variable punteggio
+    public static void setPunteggio(int punteggio) {
+        GameClass.punteggio = punteggio;
+    }
+
+    // Standard getter for the variable nickName
+    public static String getNickName() {
+        return nickName;
+    }
+
+    // Standard setter for the variable nickName
+    public static void setNickName(String nickName) {
+        GameClass.nickName = nickName;
+    }
+
+    // Getter for the boolean variable sound
+    public static boolean isSound() {
+        return sound;
+    }
+
+    // Setter for the boolean variable sound
+    public static void setSound(boolean sound) {
+        GameClass.sound = sound;
+    }
 
 }
