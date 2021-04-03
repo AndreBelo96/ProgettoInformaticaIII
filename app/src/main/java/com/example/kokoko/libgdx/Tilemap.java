@@ -28,6 +28,7 @@ public class Tilemap {
     // punteggio
     public static int punteggioTotale = 0;
 
+
     public Tilemap(GameClass gameClass){
         /*potenziamento = new Texture("");*/
         this.gameClass = gameClass;
