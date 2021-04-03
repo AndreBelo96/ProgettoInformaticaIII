@@ -30,7 +30,6 @@ public class GameScreen extends Screens implements Screen {
     private boolean bool_switch,bool_win, bool_lose;
     private Stage stage;
     private static TextureAtlas atlas;
-    private float clickY;
     private Actor winActor,pauseActor, loseActor,moveUpRightActor,moveUpLeftActor,moveBottomRightActor,moveBottomLeftActor;
 
 

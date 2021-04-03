@@ -22,7 +22,7 @@ public class Tilemap {
     //map name
     private static String map_prefix="lvl",map_filetype=".txt";
     //
-    private static int map_no = 0;
+    private static int map_no;
     // gameClass
     private static GameClass gameClass;
     // punteggio
@@ -33,7 +33,7 @@ public class Tilemap {
         this.gameClass = gameClass;
         base    = new LinkedList<Tile>();
         //objects = new LinkedList<Tile>();
-        map_no = gameClass.getnLvl();
+        map_no = gameClass.getnLvl() +1;
         punteggioTotale = 0;
         map = new String[10][10];
         try {
