@@ -86,6 +86,7 @@ public class MenuScreen extends Screens implements Screen {
 
 
         stage.addActor(playButton);
+        stage.addActor(optionButton);
         stage.addActor(exitButton);
 
         Gdx.input.setInputProcessor(this.stage);

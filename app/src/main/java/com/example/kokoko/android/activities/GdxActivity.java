@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.kokoko.R;
+import com.example.kokoko.libgdx.GameClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ public class GdxActivity extends AndroidApplication {
 
     private static final String TAG = "GdxActivity";
 
-    //public GameClass gdxController;
+    public GameClass gdxController;
 
     //add Firebase Database stuff
     private FirebaseDatabase mFirebaseDatabase;
@@ -76,12 +77,12 @@ public class GdxActivity extends AndroidApplication {
 
 
         //controller per la GDX
-        //gdxController = new GameClass(getAssets(), this);
+        gdxController = new GameClass(getAssets(), this);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        //View gdxView = initializeForView(gdxController, new AndroidApplicationConfiguration());
+        View gdxView = initializeForView(gdxController, new AndroidApplicationConfiguration());
         FrameLayout container = findViewById(R.id.container_gdx);
-        //container.addView(gdxView);
+        container.addView(gdxView);
 
 
     }
