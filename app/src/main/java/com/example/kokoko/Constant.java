@@ -59,6 +59,7 @@ public class Constant {
     public static final int N_OF_LEVELS = 6;
     public static final int FIRST_LEVEL = 0;
     public static final int LVLS_PER_PAGE = 4;
+    public static final String TILE_IN_START_POS = "1";
 
     /** ENUM DIREZIONI PLAYER*/
     public enum Direzioni {
