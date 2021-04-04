@@ -67,15 +67,19 @@ public class GameClass extends ApplicationAdapter {
     // Defines the method render enabling his esecution if the variable bSwitch is true; the delta time for the render function is hardcoded
     @Override
     public void render() {
-        if (bSwitch) setScreen();
+        if (bSwitch) {
+            setScreen();
+        }
         sActualScreen.render(deltaTime);
     }
 
     // Redefines the dispose method to only apply if the current screen is not null to avoid nullPointerExceptions
     @Override
     public void dispose() {
-        if (sActualScreen != null)
+        if (sActualScreen != null) {
             sActualScreen.dispose();
+        }
+
     }
 
     // Modifies the actual active screen by choosing based on the input value and updates the user data on load of the new screen

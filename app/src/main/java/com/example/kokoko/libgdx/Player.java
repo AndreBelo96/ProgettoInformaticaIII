@@ -56,12 +56,14 @@ public class Player implements Entity {
         bool_move = false;
         // The animation frames are parsed from the sprite which cointains all the frames based on the x position
         frames = new Array<TextureRegion>();
-        for (int i = 0; i < Constant.IDLE_SLIME_REGION; i++)
+        for (int i = 0; i < Constant.IDLE_SLIME_REGION; i++) {
             frames.add(new TextureRegion(this.screen.getAtlas().findRegion(Constant.SLIME_REGION), i * Constant.PLAYER_WIDHT, 0, Constant.PLAYER_WIDHT, Constant.PLAYER_HEIGHT));
+        }
         idle = new Animation(Constant.SLIME_FRAME_DURATION, frames, Animation.PlayMode.LOOP);
         frames.clear();
-        for (int i = Constant.IDLE_SLIME_REGION; i < Constant.MOVE_SLIME_REGION; i++)
+        for (int i = Constant.IDLE_SLIME_REGION; i < Constant.MOVE_SLIME_REGION; i++) {
             frames.add(new TextureRegion(this.screen.getAtlas().findRegion(Constant.SLIME_REGION), i * Constant.PLAYER_WIDHT, 0, Constant.PLAYER_WIDHT, Constant.PLAYER_HEIGHT));
+        }
         move = new Animation(Constant.SLIME_FRAME_DURATION, frames, Animation.PlayMode.NORMAL);
         frames.clear();
     }
@@ -76,10 +78,12 @@ public class Player implements Entity {
     @Override
     public void update(float delta) {
 
-        if (currentState == previousState)
+        if (currentState == previousState) {
             time += delta;
-        else
+        }
+        else {
             time = 0;
+        }
 
         timeControlVel += delta;
 

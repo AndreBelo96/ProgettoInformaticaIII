@@ -43,9 +43,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void initializeControls() {
         firebaseAuth = FirebaseAuth.getInstance();
         etxtUsername = (EditText) findViewById(R.id.etxtUsername);
-        if (!sharedPreferences.getString(Constant.E_MAIL, "").equals(""))
+        if (!sharedPreferences.getString(Constant.E_MAIL, "").equals("")) {
             etxtUsername.setText(sharedPreferences.getString(Constant.E_MAIL, ""));
-
+        }
         etxtPassword = (EditText) findViewById(R.id.etxtPassword);
         btnLogIn = (Button) findViewById(R.id.btnLogin);
         btnLogIn.setOnClickListener(this);

@@ -25,9 +25,11 @@ public class Tile extends Sprite {
     }
 
     public void render(SpriteBatch batch) {
-        if (onBoolean)
+        if (onBoolean) {
             batch.draw(tileOn, worldPos.x, worldPos.y, Constant.TILE_WIDHT, Constant.TILE_HEIGHT);
-        else
+        }
+        else {
             batch.draw(tileOff, worldPos.x, worldPos.y, Constant.TILE_WIDHT, Constant.TILE_HEIGHT);
+        }
     }
 }
