@@ -11,49 +11,53 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
+import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.GameClass;
-import com.example.kokoko.libgdx.Screens;
 
-public class LoseScreen extends Screens implements Screen {
+/** Classe per lo screen della sconfitta */
+public class LoseScreen extends AbstractScreens implements Screen {
     private OrthographicCamera camera;
-    private TextButton reloadbutton,exitbutton, backButton;
+    private TextButton reloadbutton;
+    private TextButton exitbutton;
+    private TextButton backButton;
+    private TextButton falsebutton;
     private Stage stage;
     private BitmapFont font;
     private GameClass gameClass;
 
-    public LoseScreen(final GameClass gameClass){
+    public LoseScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
-        TextButton.TextButtonStyle style=new TextButton.TextButtonStyle();
+        final TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         font = new BitmapFont(Gdx.files.internal("roboto_light.fnt"));
         font.setColor(Color.WHITE);
         style.font = font;
-        TextButton falsebutton = new TextButton(Constant.LOSE_TEXT,style);
-        reloadbutton = new TextButton(Constant.RELOAD_LVL_TEXT,style);
+        falsebutton = new TextButton(Constant.LOSE_TEXT, style);
+        reloadbutton = new TextButton(Constant.RELOAD_LVL_TEXT, style);
         backButton = new TextButton(Constant.BACK_TEXT, style);
-        exitbutton = new TextButton(Constant.EXIT_TEXT,style);
+        exitbutton = new TextButton(Constant.EXIT_TEXT, style);
 
-        falsebutton.setBounds(Gdx.graphics.getWidth()/2-100,Gdx.graphics.getHeight()-200,200,100);
-        reloadbutton.setBounds(Gdx.graphics.getWidth()/2-100,Gdx.graphics.getHeight()/2-50,200,100);
-        backButton.setBounds(Gdx.graphics.getWidth()/2-100,Gdx.graphics.getHeight()/2-250,200,100);
-        exitbutton.setBounds(Gdx.graphics.getWidth()/2-100,Gdx.graphics.getHeight()/2-350,200,100);
+        falsebutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() - 200, 200, 100);
+        reloadbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 50, 200, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 250, 200, 100);
+        exitbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
 
-        reloadbutton.addListener(new ClickListener(){
+        reloadbutton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                gameClass.sScreen = 1;
+                gameClass.sScreen = Constant.NumeroScreen.GAMESCREEN;
                 gameClass.bSwitch = true;
             }
         });
-        backButton.addListener(new ClickListener(){
+        backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.sScreen = 0;
+                gameClass.sScreen = Constant.NumeroScreen.MENUSCREEN;
                 gameClass.bSwitch = true;
             }
         });
-        exitbutton.addListener(new ClickListener(){
+        exitbutton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
@@ -70,8 +74,8 @@ public class LoseScreen extends Screens implements Screen {
     }
 
     @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,0,0);
+    public void render(float deltaTime) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         gameClass.batch.setProjectionMatrix(camera.combined);

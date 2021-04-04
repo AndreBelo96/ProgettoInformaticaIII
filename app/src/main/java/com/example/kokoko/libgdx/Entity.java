@@ -2,8 +2,10 @@ package com.example.kokoko.libgdx;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/** Interfaccia per  il giocatore*/
 public interface Entity {
 
-    public void render(SpriteBatch batch);
-    public void update(float delta);
+    void render(SpriteBatch batch);
+
+    void update(float delta);
 }

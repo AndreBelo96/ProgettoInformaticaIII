@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 //FireBase
 apply plugin: 'com.google.gms.google-services'
+//Testing statico
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 29
@@ -26,6 +28,17 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+}
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+    configFile = rootProject.file('app/code_quality_tools/checkstyle.xml') // tenere d'occhio
+    source 'src/main/java/com/example/kokoko'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+    ignoreFailures = false
 }
 
 dependencies {

@@ -10,22 +10,25 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.example.kokoko.Constant;
+import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.GameClass;
-import com.example.kokoko.libgdx.Screens;
 
-public class OptionScreen extends Screens implements Screen {
+/** Classe per lo screen delle opzioni */
+public class OptionScreen extends AbstractScreens implements Screen {
 
     public GameClass gameClass;
     private Skin skin;
     private OrthographicCamera camera;
-    private TextButton backButton, resetButton, controllerButton;
+    private TextButton backButton;
+    private TextButton resetButton;
+    private TextButton controllerButton;
     private Stage stage;
     private final Preferences prefs;
     private Texture title;
 
-    public OptionScreen(final GameClass gameClass){
+    public OptionScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
 
@@ -34,7 +37,7 @@ public class OptionScreen extends Screens implements Screen {
 
         resetButton = new TextButton("Reset Account", skin);
         controllerButton = new TextButton("Controller Type", skin);
-        backButton = new TextButton("Back",skin);
+        backButton = new TextButton("Back", skin);
 
         resetButton.getLabel().setFontScale(3);
         controllerButton.getLabel().setFontScale(3);
@@ -45,57 +48,37 @@ public class OptionScreen extends Screens implements Screen {
         stage = new Stage();
         stage.clear();
 
+        controllerButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 200, 400, 100);
+        resetButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 300, 400, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 400, 400, 100);
 
-        controllerButton.setBounds(Gdx.graphics.getWidth()/2 - 200,Gdx.graphics.getHeight()/2 - 200,400,100);
-        resetButton.setBounds(Gdx.graphics.getWidth()/2 - 200, Gdx.graphics.getHeight()/2 - 300,400,100);
-        //TODO posso cambiare il back con un'icona
-        backButton.setBounds(Gdx.graphics.getWidth()/2 - 200,Gdx.graphics.getHeight()/2 - 400,400,100);
-
-        controllerButton.addListener(new ClickListener(){
+        controllerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                //TODO creare varaibile per decidere che fare
-
-                /*if(gameClass.isSound())
-                   Toast.makeText(gameClass.ga,"SOUND ON", Toast.LENGTH_LONG); //TODO classe a parte per i toast?
-                else
-                    Toast.makeText(gameClass.ga,"SOUND OFF", Toast.LENGTH_LONG);*/
-
             }
         });
 
-        resetButton.addListener(new ClickListener(){
+        resetButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 gameClass.setNickName("Guest");
                 gameClass.setnLvlMax(0);
-                gameClass.setnLvl(1);
+                gameClass.setNumLvl(1);
                 gameClass.setPunteggio(0);
-                gameClass.prefs.putString("nickname",gameClass.getNickName());
-                gameClass.prefs.putInteger("nLvl",gameClass.getnLvlMax());
-                gameClass.prefs.putInteger("punteggio",gameClass.getPunteggio());
+                gameClass.prefs.putString("nickname", gameClass.getNickName());
+                gameClass.prefs.putInteger("nLvl", gameClass.getnLvlMax());
+                gameClass.prefs.putInteger("punteggio", gameClass.getPunteggio());
                 gameClass.prefs.flush();
-
-
-                /*if(gameClass.isSound())
-                   Toast.makeText(gameClass.ga,"SOUND ON", Toast.LENGTH_LONG); //TODO classe a parte per i toast?
-                else
-                    Toast.makeText(gameClass.ga,"SOUND OFF", Toast.LENGTH_LONG);*/
-
             }
         });
 
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.sScreen = 0;
+                gameClass.sScreen = Constant.NumeroScreen.MENUSCREEN;
                 gameClass.bSwitch = true;
             }
-
-        } );
-
+        });
 
         stage.addActor(controllerButton);
         stage.addActor(resetButton);
@@ -105,8 +88,8 @@ public class OptionScreen extends Screens implements Screen {
     }
 
     @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0.9f,0.2f,0.1f,1);
+    public void render(float deltaTime) {
+        Gdx.gl.glClearColor(0.9f, 0.2f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameClass.batch.setProjectionMatrix(camera.combined);
