@@ -20,7 +20,7 @@ public class GameClass extends ApplicationAdapter {
     // Variables to implement Gdx inside the application and add the GUI
     public static SpriteBatch batch;
     public static AssetManager assetManager;
-    public static GdxActivity gdxActivity;
+    private static GdxActivity gdxActivity;
     // User's variables in pref
     private static int nLvlMax;
     private static int punteggio;
@@ -28,11 +28,11 @@ public class GameClass extends ApplicationAdapter {
     private static String nickName;
     private static boolean sound;
     // Variables to change the different type on Screen in LibGdx
-    public AbstractScreens sActualScreen;
-    public Constant.NumeroScreen sScreen;
-    public boolean bSwitch;
+    private AbstractScreens sActualScreen;
+    private Constant.NumeroScreen sScreen;
+    private boolean bSwitch;
     // Variable to define the delta time for the render method across the application
-    public float deltaTime;
+    private float deltaTime;
 
     // Constructor for the GameClass class which initializes the AssetManager and the GdxActivity
     public GameClass(AssetManager assetManager, GdxActivity gdxActivity) {
@@ -147,6 +147,14 @@ public class GameClass extends ApplicationAdapter {
     // Setter for the boolean variable sound
     public static void setSound(boolean sound) {
         GameClass.sound = sound;
+    }
+
+    public void setsScreen(Constant.NumeroScreen sScreen) {
+        this.sScreen = sScreen;
+    }
+
+    public void setbSwitch(boolean bSwitch) {
+        this.bSwitch = bSwitch;
     }
 
 }

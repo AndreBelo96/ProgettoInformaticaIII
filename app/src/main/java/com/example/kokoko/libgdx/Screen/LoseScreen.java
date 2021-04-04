@@ -46,15 +46,15 @@ public class LoseScreen extends AbstractScreens implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                gameClass.sScreen = Constant.NumeroScreen.GAMESCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
+                gameClass.setbSwitch(true);
             }
         });
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.sScreen = Constant.NumeroScreen.MENUSCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.MENUSCREEN);
+                gameClass.setbSwitch(true);
             }
         });
         exitbutton.addListener(new ClickListener() {

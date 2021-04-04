@@ -46,8 +46,8 @@ public class WinScreen extends AbstractScreens implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                gameClass.sScreen = Constant.NumeroScreen.GAMESCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
+                gameClass.setbSwitch(true);
             }
         });
         nextbutton.addListener(new ClickListener() {
@@ -66,8 +66,8 @@ public class WinScreen extends AbstractScreens implements Screen {
                     gameClass.setNumLvl(gameClass.getNumLvl() + 1);
 
                 }
-                gameClass.sScreen = Constant.NumeroScreen.GAMESCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
+                gameClass.setbSwitch(true);
             }
         });
 
@@ -81,8 +81,8 @@ public class WinScreen extends AbstractScreens implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.sScreen = Constant.NumeroScreen.MENUSCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.MENUSCREEN);
+                gameClass.setbSwitch(true);
             }
         });
         //creo lo stage

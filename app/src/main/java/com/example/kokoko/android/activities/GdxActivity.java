@@ -28,7 +28,7 @@ public class GdxActivity extends AndroidApplication {
     private static Intent iChangeActivity;
 
     //public variables
-    public GameClass gdxController;
+    private GameClass gdxController;
 
     //add Firebase Database stuff
     private FirebaseDatabase mFirebaseDatabase;

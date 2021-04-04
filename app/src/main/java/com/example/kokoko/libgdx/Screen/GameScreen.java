@@ -58,8 +58,8 @@ public class GameScreen extends AbstractScreens implements Screen {
         winActor.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                gameClass.sScreen = Constant.NumeroScreen.WINSCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.WINSCREEN);
+                gameClass.setbSwitch(true);
                 return true;
             }
         });
@@ -67,8 +67,8 @@ public class GameScreen extends AbstractScreens implements Screen {
         loseActor.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                gameClass.sScreen = Constant.NumeroScreen.LOSESCREEN;
-                gameClass.bSwitch = true;
+                gameClass.setsScreen(Constant.NumeroScreen.LOSESCREEN);
+                gameClass.setbSwitch(true);
                 return true;
             }
         });
