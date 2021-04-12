@@ -85,10 +85,6 @@ public class GdxActivity extends AndroidApplication {
 
     }
 
-    public void openLogIn() {
-        iChangeActivity = new Intent(GdxActivity.this, MainActivity.class);
-        startActivity(iChangeActivity);
-    }
 
     public void updateUserInterface(int lvlComplete, int points, String nickName) {
         final FirebaseUser currentUser = mAuth.getCurrentUser();
