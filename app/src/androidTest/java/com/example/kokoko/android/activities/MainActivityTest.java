@@ -22,7 +22,6 @@ import androidx.test.runner.AndroidJUnit4;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
@@ -35,13 +34,13 @@ import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTestFail {
+public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTestFail() {
+    public void mainActivityTest() {
         ViewInteraction editText = onView(
                 allOf(withId(R.id.etxtUsername),
                         childAtPosition(
@@ -60,17 +59,13 @@ public class MainActivityTestFail {
                                         0),
                                 2),
                         isDisplayed()));
-        editText2.perform(replaceText("ginooo"), closeSoftKeyboard());
+        editText2.perform(replaceText("Ginooo"), closeSoftKeyboard());
 
-        ViewInteraction editText3 = onView(
-                allOf(withId(R.id.etxtPassword), withText("ginooo"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.btnLogin), withText("LOGIN"),
+                        withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
-        editText3.perform(pressImeActionButton());
+        button2.check(matches(isDisplayed()));
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.btnLogin), withText("Login"),
@@ -82,27 +77,6 @@ public class MainActivityTestFail {
                         isDisplayed()));
         button.perform(click());
 
-        ViewInteraction editText4 = onView(
-                allOf(withId(R.id.etxtUsername), withText("gino@gmail.it"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        editText4.check(matches(withText("gino@gmail.it")));
-
-        ViewInteraction editText5 = onView(
-                allOf(withId(R.id.etxtPassword), withText("ginooo"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        editText5.check(matches(withText("ginooo")));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.btnLogin), withText("LOGIN"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        onView(withText("Sign in failed!"))
-                .inRoot(withDecorView(not(mActivityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
