@@ -25,11 +25,13 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -119,6 +121,10 @@ public class RegisterActivityTestPassShort {
                                 4),
                         isDisplayed()));
         appCompatButton.perform(click());
+
+        onView(withText("Password too short"))
+                .inRoot(withDecorView(not(mActivityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.etxtUsername), withText("giacomo@gmail.it"),

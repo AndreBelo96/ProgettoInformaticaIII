@@ -25,21 +25,23 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTestInvalidMail {
+public class RegisterActivityTestNoConfirm {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTestInvalidMail() {
+    public void registerActivityTestNoPass() {
         ViewInteraction button = onView(
                 allOf(withId(R.id.btnRegister), withText("Registrati!"),
                         childAtPosition(
@@ -58,10 +60,10 @@ public class MainActivityTestInvalidMail {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("giovanniii"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("Giovanni@gmail.it"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.etxtUsername), withText("giovanniii"),
+                allOf(withId(R.id.etxtUsername), withText("Giovanni@gmail.it"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -78,10 +80,10 @@ public class MainActivityTestInvalidMail {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("lucaaa"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("giacomoo"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.etxtPassword), withText("lucaaa"),
+                allOf(withId(R.id.etxtPassword), withText("giacomoo"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -98,17 +100,7 @@ public class MainActivityTestInvalidMail {
                                         0),
                                 3),
                         isDisplayed()));
-        appCompatEditText5.perform(replaceText("lucaaa"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.etxtConfirmPassword), withText("lucaaa"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText6.perform(pressImeActionButton());
+        appCompatEditText5.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.btnRegister), withText("Registrati!"),
@@ -120,29 +112,29 @@ public class MainActivityTestInvalidMail {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        onView(withText("Please confirm your password"))
+                .inRoot(withDecorView(not(mActivityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+
         ViewInteraction editText = onView(
-                allOf(withId(R.id.etxtUsername), withText("giovanniii"),
+                allOf(withId(R.id.etxtUsername), withText("Giovanni@gmail.it"),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
-        editText.check(matches(withText("giovanniii")));
+        editText.check(matches(withText("Giovanni@gmail.it")));
 
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.etxtPassword), withText("lucaaa"),
+                allOf(withId(R.id.etxtPassword), withText("giacomoo"),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
-        editText2.check(matches(withText("lucaaa")));
+        editText2.check(matches(withText("giacomoo")));
 
         ViewInteraction editText3 = onView(
-                allOf(withId(R.id.etxtConfirmPassword), withText("lucaaa"),
+                allOf(withId(R.id.etxtConfirmPassword), withText(""),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
-        editText3.check(matches(withText("lucaaa")));
+        editText3.check(matches(withText("")));
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.btnRegister), withText("REGISTRATI!"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
+
     }
 
     private static Matcher<View> childAtPosition(
