@@ -47,7 +47,7 @@ public class GameClass extends ApplicationAdapter {
         prefs = Gdx.app.getPreferences("My preferences");
         nLvlMax = prefs.getInteger("nLvl", 0);
         punteggio = prefs.getInteger("punteggio", 0);
-        nickName = prefs.getString("nickname", "Guest"); //TODO aggiungere identificativo?
+        nickName = prefs.getString("nickname", "Guest");
         sound = prefs.getBoolean("sound", true);
         numLvl = 0;
         
@@ -83,25 +83,32 @@ public class GameClass extends ApplicationAdapter {
     }
 
     // Modifies the actual active screen by choosing based on the input value and updates the user data on load of the new screen
-    public void setScreen() {
+    public Constant.NumeroScreen setScreen() {
+        Constant.NumeroScreen i = null;
         if (sScreen == Constant.NumeroScreen.MENUSCREEN) {
             sActualScreen = new MenuScreen(this);
             gdxActivity.updateUserInterface(nLvlMax, punteggio, nickName);
+            i = Constant.NumeroScreen.MENUSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.GAMESCREEN) {
             sActualScreen = new GameScreen(this);
             gdxActivity.updateUserInterface(nLvlMax, punteggio, nickName);
+            i = Constant.NumeroScreen.GAMESCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.WINSCREEN) {
             sActualScreen = new WinScreen(this);
+            i = Constant.NumeroScreen.WINSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.LOSESCREEN) {
             sActualScreen = new LoseScreen(this);
+            i = Constant.NumeroScreen.LOSESCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.OPTIONSCREEN) {
             sActualScreen = new OptionScreen(this);
+            i = Constant.NumeroScreen.OPTIONSCREEN;
         }
         bSwitch = false;
+        return i;
     }
 
     // Standard getter for the variable nLvlMax
@@ -141,16 +148,6 @@ public class GameClass extends ApplicationAdapter {
     // Standard setter for the variable nickName
     public static void setNickName(String nickName) {
         GameClass.nickName = nickName;
-    }
-
-    // Getter for the boolean variable sound
-    public static boolean isSound() {
-        return sound;
-    }
-
-    // Setter for the boolean variable sound
-    public static void setSound(boolean sound) {
-        GameClass.sound = sound;
     }
 
     public void setsScreen(Constant.NumeroScreen sScreen) {

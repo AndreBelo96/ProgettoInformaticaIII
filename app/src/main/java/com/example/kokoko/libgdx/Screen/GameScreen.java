@@ -44,7 +44,7 @@ public class GameScreen extends AbstractScreens implements Screen {
         atlas = new TextureAtlas("Asset_Proj.pack");
         camera = new OrthographicCamera(Constant.NUMERO_PIXEL_X, Constant.NUMERO_PIXEL_Y);
         camera.position.set(Constant.TILE_WIDHT / 2, Constant.TILE_WIDHT / 2 + Constant.BORDER_HEIGHT, 0);
-        player = new Player(this);
+        player = new Player(this, camera);
         map = new Tilemap(this.gameClass);
 
         bool_switch = false;
@@ -93,8 +93,6 @@ public class GameScreen extends AbstractScreens implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.isCanJump()) {
-                    camera.position.y += Constant.CAMERA_MOVEMENT_Y;
-                    camera.position.x += Constant.CAMERA_MOVEMENT_X;
                     player.move(Constant.Direzioni.TOPRIGHT);
                 }
                 return true;
@@ -107,8 +105,6 @@ public class GameScreen extends AbstractScreens implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.isCanJump()) {
-                    camera.position.y += Constant.CAMERA_MOVEMENT_Y;
-                    camera.position.x -= Constant.CAMERA_MOVEMENT_X;
                     player.move(Constant.Direzioni.TOPLEFT);
                 }
                 return true;
@@ -121,8 +117,6 @@ public class GameScreen extends AbstractScreens implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.isCanJump()) {
-                    camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
-                    camera.position.x -= Constant.CAMERA_MOVEMENT_X;
                     player.move(Constant.Direzioni.BOTTOMLEFT);
                 }
                 return true;
@@ -135,8 +129,6 @@ public class GameScreen extends AbstractScreens implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.isCanJump()) {
-                    camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
-                    camera.position.x += Constant.CAMERA_MOVEMENT_X;
                     player.move(Constant.Direzioni.BOTTOMRIGHT);
                 }
                 return true;
@@ -191,7 +183,7 @@ public class GameScreen extends AbstractScreens implements Screen {
         controlInput();
     }
 
-    public void controlInput() {
+    private void controlInput() {
         if (bool_win) {
             winActor.fire(new Event());
         }
@@ -213,22 +205,14 @@ public class GameScreen extends AbstractScreens implements Screen {
     }
 
     //metodo per controllare gli input da tastiera
-    public void cameraInput() {
+    private void cameraInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.A) && player.isCanJump()) {
-            camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
-            camera.position.x -= Constant.CAMERA_MOVEMENT_X;
             player.move(Constant.Direzioni.BOTTOMLEFT);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.D) && player.isCanJump()) {
-            camera.position.y += Constant.CAMERA_MOVEMENT_Y;
-            camera.position.x += Constant.CAMERA_MOVEMENT_X;
             player.move(Constant.Direzioni.TOPRIGHT);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.W) && player.isCanJump()) {
-            camera.position.y += Constant.CAMERA_MOVEMENT_Y;
-            camera.position.x -= Constant.CAMERA_MOVEMENT_X;
             player.move(Constant.Direzioni.TOPLEFT);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.S) && player.isCanJump()) {
-            camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
-            camera.position.x += Constant.CAMERA_MOVEMENT_X;
             player.move(Constant.Direzioni.BOTTOMRIGHT);
         }
     }

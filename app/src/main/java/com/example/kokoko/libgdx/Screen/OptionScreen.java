@@ -100,6 +100,5 @@ public class OptionScreen extends AbstractScreens implements Screen {
 
         stage.draw();
         stage.act();
-
     }
 }

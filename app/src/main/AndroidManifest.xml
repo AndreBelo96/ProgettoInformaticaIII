@@ -18,6 +18,8 @@
         <activity android:name=".android.activities.RegisterActivity" />
         <activity android:name=".android.activities.GdxActivity"
             android:screenOrientation="landscape"/>
+        <uses-library android:name="android.test.runner"
+            android:required="false"/>
     </application>
 
 </manifest>

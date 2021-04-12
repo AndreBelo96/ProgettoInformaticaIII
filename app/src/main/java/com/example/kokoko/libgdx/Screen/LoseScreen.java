@@ -17,10 +17,10 @@ import com.example.kokoko.libgdx.GameClass;
 /** Classe per lo screen della sconfitta */
 public class LoseScreen extends AbstractScreens implements Screen {
     private OrthographicCamera camera;
-    private TextButton reloadbutton;
-    private TextButton exitbutton;
+    private TextButton reloadButton;
+    private TextButton exitButton;
     private TextButton backButton;
-    private TextButton falsebutton;
+    private TextButton falseButton;
     private Stage stage;
     private BitmapFont font;
     private GameClass gameClass;
@@ -32,17 +32,17 @@ public class LoseScreen extends AbstractScreens implements Screen {
         font = new BitmapFont(Gdx.files.internal("roboto_light.fnt"));
         font.setColor(Color.WHITE);
         style.font = font;
-        falsebutton = new TextButton(Constant.LOSE_TEXT, style);
-        reloadbutton = new TextButton(Constant.RELOAD_LVL_TEXT, style);
+        falseButton = new TextButton(Constant.LOSE_TEXT, style);
+        reloadButton = new TextButton(Constant.RELOAD_LVL_TEXT, style);
         backButton = new TextButton(Constant.BACK_TEXT, style);
-        exitbutton = new TextButton(Constant.EXIT_TEXT, style);
+        exitButton = new TextButton(Constant.EXIT_TEXT, style);
 
-        falsebutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() - 200, 200, 100);
-        reloadbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 50, 200, 100);
+        falseButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() - 200, 200, 100);
+        reloadButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 50, 200, 100);
         backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 250, 200, 100);
-        exitbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
+        exitButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
 
-        reloadbutton.addListener(new ClickListener() {
+        reloadButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -57,7 +57,7 @@ public class LoseScreen extends AbstractScreens implements Screen {
                 gameClass.setbSwitch(true);
             }
         });
-        exitbutton.addListener(new ClickListener() {
+        exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
@@ -67,10 +67,10 @@ public class LoseScreen extends AbstractScreens implements Screen {
         stage = new Stage();
         stage.clear();
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(falsebutton);
-        stage.addActor(reloadbutton);
+        stage.addActor(falseButton);
+        stage.addActor(reloadButton);
         stage.addActor(backButton);
-        stage.addActor(exitbutton);
+        stage.addActor(exitButton);
     }
 
     @Override

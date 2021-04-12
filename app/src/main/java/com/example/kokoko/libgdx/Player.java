@@ -1,5 +1,6 @@
 package com.example.kokoko.libgdx;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,6 +35,7 @@ public class Player implements Entity {
     private float animationMoveTime;
     private float timeControlVel;
     private boolean bool_move;
+    private OrthographicCamera camera;
     private boolean startAnimMove;
     private boolean canJump;
     
@@ -41,12 +43,13 @@ public class Player implements Entity {
     private int wasd;
 
     // Constructor for the player class where the player position is initialized and the world position is set as origin, all the other variables to control the player movement are set at their default starting value
-    public Player(GameScreen screen) {
+    public Player(GameScreen screen, OrthographicCamera camera) {
         this.pos = new Vector2(Constant.PLAYER_POS_INIT_X, Constant.PLAYER_POS_INIT_Y);
         this.worldPos = new Vector2(0, 0);
         this.screen = screen;
         time = 0;
         wasd = 0;
+        this.camera = camera;
         canJump = true;
         timeControlVel = 0;
         animationMoveTime = 0;
@@ -97,18 +100,30 @@ public class Player implements Entity {
                 case 1:
                     pos.x -= Constant.PLAYER_SPOS_INIT_X;
                     pos.y += Constant.PLAYER_SPOS_INIT_Y;
+                    camera.position.y += Constant.CAMERA_MOVEMENT_Y;
+                    camera.position.x -= Constant.CAMERA_MOVEMENT_X;
+                    wasd = 0;
                     break;
                 case 2:
                     pos.x += Constant.PLAYER_SPOS_INIT_X;
                     pos.y -= Constant.PLAYER_SPOS_INIT_Y;
+                    camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
+                    camera.position.x += Constant.CAMERA_MOVEMENT_X;
+                    wasd = 0;
                     break;
                 case 3:
                     pos.x -= Constant.PLAYER_SPOS_INIT_X;
                     pos.y -= Constant.PLAYER_SPOS_INIT_Y;
+                    camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
+                    camera.position.x -= Constant.CAMERA_MOVEMENT_X;
+                    wasd = 0;
                     break;
                 case 4:
                     pos.x += Constant.PLAYER_SPOS_INIT_X;
                     pos.y += Constant.PLAYER_SPOS_INIT_Y;
+                    camera.position.y += Constant.CAMERA_MOVEMENT_Y;
+                    camera.position.x += Constant.CAMERA_MOVEMENT_X;
+                    wasd = 0;
                     break;
                 default:
             }
@@ -117,7 +132,8 @@ public class Player implements Entity {
     }
 
     // Activates the state to enable movement and defines the movement direction in world axis
-    public void move(Constant.Direzioni dir) {
+    public int move(Constant.Direzioni dir) {
+        int i = 0;
         if (canJump && !currentState.equals(State.JUMPING)) {
             switch (dir) {
                 case TOPLEFT:
@@ -127,6 +143,7 @@ public class Player implements Entity {
                     wasd = 1;
                     worldPos.x += 1;
                     currentState = State.JUMPING;
+                    i = 1;
                     break;
                 case BOTTOMRIGHT:
                     bool_move = true;
@@ -135,6 +152,7 @@ public class Player implements Entity {
                     wasd = 2;
                     worldPos.x -= 1;
                     currentState = State.JUMPING;
+                    i = 2;
                     break;
                 case BOTTOMLEFT:
                     bool_move = true;
@@ -143,6 +161,7 @@ public class Player implements Entity {
                     wasd = 3;
                     worldPos.y -= 1;
                     currentState = State.JUMPING;
+                    i = 3;
                     break;
                 case TOPRIGHT:
                     bool_move = true;
@@ -151,11 +170,13 @@ public class Player implements Entity {
                     worldPos.y += 1;
                     wasd = 4;
                     currentState = State.JUMPING;
+                    i = 4;
                     break;
                 default:
             }
 
         }
+        return i;
     }
 
     // Standard getter for the variable worldPos
@@ -164,7 +185,7 @@ public class Player implements Entity {
     }
 
     // Returns the region of the texture to use based on the kind of animation (idle or jumping) and the time
-    public TextureRegion setRegion(float delta_time) {
+    private TextureRegion setRegion(float delta_time) {
         final TextureRegion textureRegion;
         if (bool_move) {
             if (animationMoveTime >= Constant.MOVE_TIME) {

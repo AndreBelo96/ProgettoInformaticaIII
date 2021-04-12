@@ -48,7 +48,7 @@ public class Tilemap {
         }
     }
 
-    public void fillMap() throws IOException {
+    private void fillMap() throws IOException {
         final InputStream inputStream = gameClass.assetManager.open(mapdir());
         final int size = inputStream.available();
         final byte[] buffer = new byte[size];
@@ -89,11 +89,6 @@ public class Tilemap {
     private static String mapdir() {
         return Tilemap.map_prefix + Tilemap.mapNum + Tilemap.map_filetype;
     }
-
-    public static void mapUpdate(int nextLevel) {
-        Tilemap.mapNum = new Integer(nextLevel);
-    }
-
 
 }
 

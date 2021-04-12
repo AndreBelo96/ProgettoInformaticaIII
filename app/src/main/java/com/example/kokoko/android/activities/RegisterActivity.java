@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    public void openMenuGame() {
+    private void openMenuGame() {
         final Intent iChangeActivity = new Intent(this, GdxActivity.class);
         startActivity(iChangeActivity);
     }
