@@ -25,6 +25,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
     private TextButton playButton;
     private TextButton exitButton;
     private TextButton optionButton;
+    private TextButton scoreBoardButton;
     private Stage stage;
     private final Preferences prefs;
     private Texture title;
@@ -44,10 +45,12 @@ public class MenuScreen extends AbstractScreens implements Screen {
 
         playButton = new TextButton("Play", skin);
         optionButton = new TextButton("Option", skin);
+        scoreBoardButton = new TextButton("Scoreboard", skin);
         exitButton = new TextButton(Constant.EXIT_TEXT, skin);
 
         playButton.getLabel().setFontScale(3);
         optionButton.getLabel().setFontScale(3);
+        scoreBoardButton.getLabel().setFontScale(3);
         exitButton.getLabel().setFontScale(3);
 
         stage = new Stage();
@@ -55,6 +58,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
 
         playButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 100, 400, 150);
         optionButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 250, 400, 150);
+        scoreBoardButton.setBounds(Gdx.graphics.getWidth()/2 - 200, Gdx.graphics.getHeight()/2 - 400, 400,150);
         exitButton.setBounds(Gdx.graphics.getWidth() / 2 + 500, Gdx.graphics.getHeight() / 2 - 500, 400, 150);
 
         playButton.addListener(new ClickListener() {
@@ -73,6 +77,15 @@ public class MenuScreen extends AbstractScreens implements Screen {
             }
         });
 
+        scoreBoardButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gameClass.setsScreen(Constant.NumeroScreen.SCOREBOARDSCREEN);
+                gameClass.setbSwitch(true);
+
+            }
+        });
+
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -82,6 +95,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
 
         stage.addActor(playButton);
         stage.addActor(optionButton);
+        stage.addActor(scoreBoardButton);
         stage.addActor(exitButton);
 
         Gdx.input.setInputProcessor(this.stage);

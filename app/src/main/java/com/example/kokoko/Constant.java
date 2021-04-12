@@ -75,7 +75,8 @@ public class Constant {
         GAMESCREEN,
         WINSCREEN,
         LOSESCREEN,
-        OPTIONSCREEN
+        OPTIONSCREEN,
+        SCOREBOARDSCREEN
     }
 
     //ACTIVITY CONSTANT STRING
