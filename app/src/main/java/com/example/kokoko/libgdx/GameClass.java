@@ -20,7 +20,7 @@ public class GameClass extends ApplicationAdapter {
     // Variables to implement Gdx inside the application and add the GUI
     public static SpriteBatch batch;
     public static AssetManager assetManager;
-    private static GdxActivity gdxActivity;
+    public static GdxActivity gdxActivity;
     // User's variables in pref
     private static int nLvlMax;
     private static int punteggio;

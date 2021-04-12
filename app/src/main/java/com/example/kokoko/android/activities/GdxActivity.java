@@ -94,6 +94,14 @@ public class GdxActivity extends AndroidApplication {
         myRef.child(userUid).child(Constant.DATA).child(Constant.NAME).setValue(nickName);
     }
 
+    public String[] getNomi(){
+        return nomi;
+    }
+
+    public int[] getPunti(){
+        return punti;
+    }
+
     public String getName() {
         return name;
     }
