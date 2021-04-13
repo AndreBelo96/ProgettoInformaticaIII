@@ -34,7 +34,6 @@ public class GdxActivity extends AndroidApplication {
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
-    private int puntiAttuali;
     private int[] punti;
     private String[] nomi;
     private String name;
@@ -85,6 +84,10 @@ public class GdxActivity extends AndroidApplication {
 
     }
 
+    public void openLogIn() {
+        iChangeActivity = new Intent(GdxActivity.this, MainActivity.class);
+        startActivity(iChangeActivity);
+    }
 
     public void updateUserInterface(int lvlComplete, int points, String nickName) {
         final FirebaseUser currentUser = mAuth.getCurrentUser();
