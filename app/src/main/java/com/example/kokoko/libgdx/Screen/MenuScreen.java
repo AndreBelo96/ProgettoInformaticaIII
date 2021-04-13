@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.GameClass;
+import com.google.firebase.auth.FirebaseAuth;
 
 /** Classe per lo screen del menu */
 public class MenuScreen extends AbstractScreens implements Screen {
@@ -26,12 +28,11 @@ public class MenuScreen extends AbstractScreens implements Screen {
     private TextButton exitButton;
     private TextButton optionButton;
     private TextButton scoreBoardButton;
+    private TextButton logOutButton;
     private Stage stage;
+    private Label namePlayer;
     private final Preferences prefs;
     private Texture title;
-
-    //TODO inserire un'immagine per il titolo
-    private BitmapFont font;
 
     public MenuScreen(final GameClass gameClass) {
 
@@ -46,11 +47,15 @@ public class MenuScreen extends AbstractScreens implements Screen {
         playButton = new TextButton("Play", skin);
         optionButton = new TextButton("Option", skin);
         scoreBoardButton = new TextButton("Scoreboard", skin);
+        namePlayer = new Label(GameClass.getNickName(), skin);
+        logOutButton = new TextButton("Logout", skin);
         exitButton = new TextButton(Constant.EXIT_TEXT, skin);
 
         playButton.getLabel().setFontScale(3);
         optionButton.getLabel().setFontScale(3);
         scoreBoardButton.getLabel().setFontScale(3);
+        namePlayer.setFontScale(3);
+        logOutButton.getLabel().setFontScale(3);
         exitButton.getLabel().setFontScale(3);
 
         stage = new Stage();
@@ -58,7 +63,9 @@ public class MenuScreen extends AbstractScreens implements Screen {
 
         playButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 100, 400, 150);
         optionButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 250, 400, 150);
-        scoreBoardButton.setBounds(Gdx.graphics.getWidth()/2 - 200, Gdx.graphics.getHeight()/2 - 400, 400,150);
+        scoreBoardButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 400, 400, 150);
+        namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 500, Gdx.graphics.getHeight() / 2 - 350 , 200, 100);
+        logOutButton.setBounds(Gdx.graphics.getWidth() / 2 + 500,Gdx.graphics.getHeight() / 2 - 350, 400, 150);
         exitButton.setBounds(Gdx.graphics.getWidth() / 2 + 500, Gdx.graphics.getHeight() / 2 - 500, 400, 150);
 
         playButton.addListener(new ClickListener() {
@@ -86,6 +93,14 @@ public class MenuScreen extends AbstractScreens implements Screen {
             }
         });
 
+        logOutButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                FirebaseAuth.getInstance().signOut();
+                gameClass.gdxActivity.openLogIn();
+            }
+        });
+
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -96,6 +111,8 @@ public class MenuScreen extends AbstractScreens implements Screen {
         stage.addActor(playButton);
         stage.addActor(optionButton);
         stage.addActor(scoreBoardButton);
+        stage.addActor(logOutButton);
+        stage.addActor(namePlayer);
         stage.addActor(exitButton);
 
         Gdx.input.setInputProcessor(this.stage);
