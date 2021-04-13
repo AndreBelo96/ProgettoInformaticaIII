@@ -161,4 +161,14 @@ public class GameClass extends ApplicationAdapter {
         this.bSwitch = bSwitch;
     }
 
+    // Getter for the boolean variable sound
+    public static boolean isSound() {
+        return sound;
+    }
+
+    // Setter for the boolean variable sound
+    public static void setSound(boolean sound) {
+        GameClass.sound = sound;
+    }
+
 }
