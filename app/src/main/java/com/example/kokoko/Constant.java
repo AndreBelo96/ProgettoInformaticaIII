@@ -31,6 +31,12 @@ public class Constant {
     public static final float PLAYER_SPOS_INIT_X = TILE_WIDHT / 2;
     public static final float PLAYER_SPOS_INIT_Y = TILE_HEIGHT / 2 - BORDER_HEIGHT / 2;
 
+    //ARROWS
+    public static final int ARROW_WIDHT = 13;
+    public static final int ARROW_HEIGHT = 10;
+    public static final float ARROW_SPOS_INIT_X = ARROW_WIDHT / 2;
+    public static final float ARROW_SPOS_INIT_Y = ARROW_HEIGHT / 2 - BORDER_HEIGHT / 2;
+
     //TIMER
     public static final float IDLE_TIME = 10f * 0.2f;
     public static final float MOVE_TIME = 17f * 0.1f;

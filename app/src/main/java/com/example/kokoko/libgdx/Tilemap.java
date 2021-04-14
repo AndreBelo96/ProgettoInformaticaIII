@@ -16,26 +16,30 @@ public class Tilemap {
     //map name
     private static String map_prefix = "lvl";
     private static String map_filetype = ".txt";
+    private static String arrow_prefix = "arrow";
     //
-    private static int mapNum;
+    private static int mapNum = 1;
     // gameClass
     private static GameClass gameClass;
     //base mappa
     public LinkedList<Tile> base;
     //oggetti mappa
-    //public LinkedList<Tile> objects;
-    private Texture potenziamento;
+    public LinkedList<Arrow> arrows;
     //map
     private String[][] map;
+    private String[][] arrowMap;
 
     public Tilemap(GameClass gameClass) {
         this.gameClass = gameClass;
         base = new LinkedList<Tile>();
-        mapNum = gameClass.getNumLvl() + 1;
+        arrows = new LinkedList<Arrow>();
+        mapNum = gameClass.getNumLvl();
         punteggioTotale = 0;
         map = new String[10][10];
+        arrowMap = new String[10][10];
         try {
             fillMap();
+            fillObject();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -44,6 +48,9 @@ public class Tilemap {
 
     public void render(SpriteBatch batch) {
         for (Tile t : base) {
+            t.render(batch);
+        }
+        for (Arrow t : arrows) {
             t.render(batch);
         }
     }
@@ -86,9 +93,51 @@ public class Tilemap {
         }
     }
 
+    public void fillObject() throws IOException{
+        InputStream is = gameClass.assetManager.open(arrowDir());
+        int size = is.available();
+        byte[] buffer = new byte[size];
+        is.read(buffer);
+
+        String s  = new String(buffer);
+        int count_row = 0;
+        int count_col = 0;
+
+        String[] temp = s.split("\n");
+
+        count_col = (temp[0].length()+1)/2;
+        for(int i = 0; i < temp.length ; i++){
+            arrowMap[count_row] = temp[count_row].split(" ");
+            count_row++;
+        }
+        is.close();
+
+        arrowMap[0][0] = "0"; // per mettere il player
+        for(int row = count_row-1; row >= 0; row--){
+            for(int col = count_col-1; col >= 0; col--){
+                //serve per la visuale isometrica
+                float x = ((row - col) * (Constant.TILE_SPOS_INIT_X)) + Constant.TILE_WIDHT/2 - Constant.ARROW_WIDHT / 2;
+                float y = ((col + row) * (Constant.TILE_SPOS_INIT_Y)) + Constant.TILE_HEIGHT/2 - Constant.ARROW_HEIGHT / 2 + Constant.BORDER_HEIGHT / 2;
+
+                if(arrowMap[row][col].contains("1"))
+                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.TOPLEFT));
+                else if(arrowMap[row][col].contains("2"))
+                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.TOPRIGHT));
+                else if(arrowMap[row][col].contains("3"))
+                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.BOTTOMRIGHT));
+                else if(arrowMap[row][col].contains("4"))
+                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.BOTTOMLEFT));
+            }
+        }
+    }
+
+
     private static String mapdir() {
         return Tilemap.map_prefix + Tilemap.mapNum + Tilemap.map_filetype;
     }
 
+    private static String arrowDir(){
+        return Tilemap.arrow_prefix + Tilemap.mapNum + Tilemap.map_filetype;
+    }
 }
 
