@@ -82,7 +82,8 @@ public class Constant {
         WINSCREEN,
         LOSESCREEN,
         OPTIONSCREEN,
-        SCOREBOARDSCREEN
+        SCOREBOARDSCREEN,
+        SELECTSCREEN
     }
 
     //ACTIVITY CONSTANT STRING

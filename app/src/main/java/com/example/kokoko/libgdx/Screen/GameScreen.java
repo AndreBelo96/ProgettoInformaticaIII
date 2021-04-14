@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
+import com.example.kokoko.libgdx.Arrow;
 import com.example.kokoko.libgdx.GameClass;
 import com.example.kokoko.libgdx.Player;
 import com.example.kokoko.libgdx.Tile;
@@ -146,10 +147,6 @@ public class GameScreen extends AbstractScreens implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // disegno sulla camera
         gameClass.batch.setProjectionMatrix(camera.combined);
-        cameraInput();
-
-        camera.update();
-        player.update(deltaTime);
 
         //cambia colore tile
         for (Tile t : map.base) {
@@ -158,6 +155,27 @@ public class GameScreen extends AbstractScreens implements Screen {
                 bool_switch = false;
             }
         }
+
+        for(Arrow a : map.arrows){
+            if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.TOPLEFT){
+                player.move(Constant.Direzioni.TOPLEFT);
+            }
+            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.TOPRIGHT){
+                player.move(Constant.Direzioni.TOPRIGHT);
+            }
+            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.BOTTOMLEFT){
+                player.move(Constant.Direzioni.BOTTOMLEFT);
+            }
+            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.BOTTOMRIGHT){
+                player.move(Constant.Direzioni.BOTTOMRIGHT);
+            }
+        }
+
+        cameraInput();
+        player.update(deltaTime);
+        camera.update();
+
+
 
         gameClass.batch.begin();
         map.render(gameClass.batch);

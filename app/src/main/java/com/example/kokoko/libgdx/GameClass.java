@@ -12,6 +12,7 @@ import com.example.kokoko.libgdx.Screen.LoseScreen;
 import com.example.kokoko.libgdx.Screen.MenuScreen;
 import com.example.kokoko.libgdx.Screen.OptionScreen;
 import com.example.kokoko.libgdx.Screen.ScoreboardScreen;
+import com.example.kokoko.libgdx.Screen.SelectScreen;
 import com.example.kokoko.libgdx.Screen.WinScreen;
 
 /** Classe per la creazione del game */
@@ -101,6 +102,7 @@ public class GameClass extends ApplicationAdapter {
             i = Constant.NumeroScreen.WINSCREEN;
         }else if(sScreen == Constant.NumeroScreen.SCOREBOARDSCREEN) {
             sActualScreen = new ScoreboardScreen(this);
+            i = Constant.NumeroScreen.SCOREBOARDSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.LOSESCREEN) {
             sActualScreen = new LoseScreen(this);
@@ -109,6 +111,10 @@ public class GameClass extends ApplicationAdapter {
         else if (sScreen == Constant.NumeroScreen.OPTIONSCREEN) {
             sActualScreen = new OptionScreen(this);
             i = Constant.NumeroScreen.OPTIONSCREEN;
+        }
+        else if (sScreen == Constant.NumeroScreen.SELECTSCREEN) {
+            sActualScreen = new SelectScreen(this);
+            i = Constant.NumeroScreen.SELECTSCREEN;
         }
         bSwitch = false;
         return i;

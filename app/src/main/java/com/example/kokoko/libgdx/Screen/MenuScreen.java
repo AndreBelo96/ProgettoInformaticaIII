@@ -71,7 +71,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
+                gameClass.setsScreen(Constant.NumeroScreen.SELECTSCREEN);
                 gameClass.setbSwitch(true);
             }
         });
