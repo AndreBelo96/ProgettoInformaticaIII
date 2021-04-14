@@ -58,6 +58,20 @@ public class OptionScreen extends AbstractScreens implements Screen {
         stage = new Stage();
         stage.clear();
 
+        setButtons();
+
+        stage.addActor(changeNickButton);
+        stage.addActor(soundButton);
+        stage.addActor(controllerButton);
+        stage.addActor(resetButton);
+        stage.addActor(namePlayer);
+        stage.addActor(backButton);
+
+        Gdx.input.setInputProcessor(this.stage);
+    }
+
+    private void setButtons(){
+
         namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 + 100, 200, 100);
         changeNickButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2, 400, 100);
         soundButton.setBounds(Gdx.graphics.getWidth() / 2 - 200,Gdx.graphics.getHeight() / 2 - 100, 400, 100);
@@ -83,9 +97,7 @@ public class OptionScreen extends AbstractScreens implements Screen {
         soundButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 gameClass.setSound(!gameClass.isSound());
-
             }
         });
 
@@ -106,7 +118,6 @@ public class OptionScreen extends AbstractScreens implements Screen {
         controllerButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
             }
         });
 
@@ -117,15 +128,6 @@ public class OptionScreen extends AbstractScreens implements Screen {
                 gameClass.setbSwitch(true);
             }
         });
-
-        stage.addActor(changeNickButton);
-        stage.addActor(soundButton);
-        stage.addActor(controllerButton);
-        stage.addActor(resetButton);
-        stage.addActor(namePlayer);
-        stage.addActor(backButton);
-
-        Gdx.input.setInputProcessor(this.stage);
     }
 
     @Override

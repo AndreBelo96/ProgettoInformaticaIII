@@ -144,7 +144,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         stage.dispose();
     }
 
-    public void mergeSort(int[] punti, String[] nomi, int p, int r){
+    private void mergeSort(int[] punti, String[] nomi, int p, int r){
         if(p < r){
             int q = (p + r) / 2;
             mergeSort(punti, nomi,  p,  q);
@@ -153,7 +153,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         }
     }
 
-    public void trueMerge(int[] punti, String[] nomi, int p, int q ,int r){
+    private void trueMerge(int[] punti, String[] nomi, int p, int q ,int r){
         int i = p;
         int j = q+1;
         int k = 0;
