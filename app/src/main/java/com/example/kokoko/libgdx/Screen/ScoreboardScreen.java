@@ -197,7 +197,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         }
     }
 
-    public void createScoreboard(int n, Label[] classifica){
+    private void createScoreboard(int n, Label[] classifica){
         for(int i = 0; i < Math.min(nPlayer,Constant.NUM_FOR_PAGES); i++) {
             if (i == 0)
                 classifica[n+i].setBounds(Gdx.graphics.getWidth() / 2 - textWidth/2, Gdx.graphics.getHeight() - (350), textWidth, 150);

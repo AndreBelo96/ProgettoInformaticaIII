@@ -33,7 +33,8 @@ public class SelectScreen extends AbstractScreens implements Screen {
     private TextButton[] numberLevel;
     private Label onlineLabel;
     private Stage stage;
-    private int moltiplicatore, nLvl;
+    private int moltiplicatore;
+    private int nLvl;
     private boolean end;
     private final Preferences prefs;
 
