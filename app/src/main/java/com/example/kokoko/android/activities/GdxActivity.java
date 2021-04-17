@@ -97,11 +97,11 @@ public class GdxActivity extends AndroidApplication {
         myRef.child(userUid).child(Constant.DATA).child(Constant.NAME).setValue(nickName);
     }
 
-    public String[] getNomi(){
+    public String[] getNomi() {
         return nomi;
     }
 
-    public int[] getPunti(){
+    public int[] getPunti() {
         return punti;
     }
 

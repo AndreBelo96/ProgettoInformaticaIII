@@ -156,26 +156,11 @@ public class GameScreen extends AbstractScreens implements Screen {
             }
         }
 
-        for(Arrow a : map.arrows){
-            if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.TOPLEFT){
-                player.move(Constant.Direzioni.TOPLEFT);
-            }
-            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.TOPRIGHT){
-                player.move(Constant.Direzioni.TOPRIGHT);
-            }
-            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.BOTTOMLEFT){
-                player.move(Constant.Direzioni.BOTTOMLEFT);
-            }
-            else if(player.getPos().x == a.arrowMapPos.y && player.getPos().y == a.arrowMapPos.x && a.direzione == Constant.Direzioni.BOTTOMRIGHT){
-                player.move(Constant.Direzioni.BOTTOMRIGHT);
-            }
-        }
+        useArrow();
 
         cameraInput();
         player.update(deltaTime);
         camera.update();
-
-
 
         gameClass.batch.begin();
         map.render(gameClass.batch);
@@ -199,6 +184,29 @@ public class GameScreen extends AbstractScreens implements Screen {
         }
 
         controlInput();
+    }
+
+    private void useArrow() {
+        for (Arrow a : map.arrows) {
+            if (playerInTile(a)) {
+                if (a.direzione == Constant.Direzioni.TOPLEFT) {
+                    player.move(Constant.Direzioni.TOPLEFT);
+                }
+                else if (a.direzione == Constant.Direzioni.TOPRIGHT) {
+                    player.move(Constant.Direzioni.TOPRIGHT);
+                }
+                else if (a.direzione == Constant.Direzioni.BOTTOMLEFT) {
+                    player.move(Constant.Direzioni.BOTTOMLEFT);
+                }
+                else if (a.direzione == Constant.Direzioni.BOTTOMRIGHT) {
+                    player.move(Constant.Direzioni.BOTTOMRIGHT);
+                }
+            }
+        }
+    }
+
+    private boolean playerInTile(Arrow arrow) {
+        return player.getPos().x == arrow.arrowMapPos.y && player.getPos().y == arrow.arrowMapPos.x;
     }
 
     private void controlInput() {

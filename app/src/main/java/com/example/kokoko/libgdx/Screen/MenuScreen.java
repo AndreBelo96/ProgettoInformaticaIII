@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -58,14 +57,26 @@ public class MenuScreen extends AbstractScreens implements Screen {
         logOutButton.getLabel().setFontScale(3);
         exitButton.getLabel().setFontScale(3);
 
+        setButton();
+
         stage = new Stage();
         stage.clear();
+        stage.addActor(playButton);
+        stage.addActor(optionButton);
+        stage.addActor(scoreBoardButton);
+        stage.addActor(logOutButton);
+        stage.addActor(namePlayer);
+        stage.addActor(exitButton);
 
+        Gdx.input.setInputProcessor(this.stage);
+    }
+
+    private void setButton() {
         playButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 100, 400, 150);
         optionButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 250, 400, 150);
         scoreBoardButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 400, 400, 150);
-        namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 500, Gdx.graphics.getHeight() / 2 - 350 , 200, 100);
-        logOutButton.setBounds(Gdx.graphics.getWidth() / 2 + 500,Gdx.graphics.getHeight() / 2 - 350, 400, 150);
+        namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 500, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
+        logOutButton.setBounds(Gdx.graphics.getWidth() / 2 + 500, Gdx.graphics.getHeight() / 2 - 350, 400, 150);
         exitButton.setBounds(Gdx.graphics.getWidth() / 2 + 500, Gdx.graphics.getHeight() / 2 - 500, 400, 150);
 
         playButton.addListener(new ClickListener() {
@@ -84,7 +95,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
             }
         });
 
-        scoreBoardButton.addListener(new ClickListener(){
+        scoreBoardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameClass.setsScreen(Constant.NumeroScreen.SCOREBOARDSCREEN);
@@ -93,7 +104,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
             }
         });
 
-        logOutButton.addListener(new ClickListener(){
+        logOutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 FirebaseAuth.getInstance().signOut();
@@ -107,17 +118,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
                 Gdx.app.exit();
             }
         });
-
-        stage.addActor(playButton);
-        stage.addActor(optionButton);
-        stage.addActor(scoreBoardButton);
-        stage.addActor(logOutButton);
-        stage.addActor(namePlayer);
-        stage.addActor(exitButton);
-
-        Gdx.input.setInputProcessor(this.stage);
     }
-
 
     public void render(float deltaTime) {
         Gdx.gl.glClearColor(0.9f, 0.2f, 0.1f, 1);

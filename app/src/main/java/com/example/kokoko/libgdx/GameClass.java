@@ -86,38 +86,39 @@ public class GameClass extends ApplicationAdapter {
 
     // Modifies the actual active screen by choosing based on the input value and updates the user data on load of the new screen
     public Constant.NumeroScreen setScreen() {
-        Constant.NumeroScreen i = null;
+        Constant.NumeroScreen returnVariable = null;
         if (sScreen == Constant.NumeroScreen.MENUSCREEN) {
             sActualScreen = new MenuScreen(this);
             gdxActivity.updateUserInterface(nLvlMax, punteggio, nickName);
-            i = Constant.NumeroScreen.MENUSCREEN;
+            returnVariable = Constant.NumeroScreen.MENUSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.GAMESCREEN) {
             sActualScreen = new GameScreen(this);
             gdxActivity.updateUserInterface(nLvlMax, punteggio, nickName);
-            i = Constant.NumeroScreen.GAMESCREEN;
+            returnVariable = Constant.NumeroScreen.GAMESCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.WINSCREEN) {
             sActualScreen = new WinScreen(this);
-            i = Constant.NumeroScreen.WINSCREEN;
-        }else if(sScreen == Constant.NumeroScreen.SCOREBOARDSCREEN) {
+            returnVariable = Constant.NumeroScreen.WINSCREEN;
+        }
+        else if (sScreen == Constant.NumeroScreen.SCOREBOARDSCREEN) {
             sActualScreen = new ScoreboardScreen(this);
-            i = Constant.NumeroScreen.SCOREBOARDSCREEN;
+            returnVariable = Constant.NumeroScreen.SCOREBOARDSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.LOSESCREEN) {
             sActualScreen = new LoseScreen(this);
-            i = Constant.NumeroScreen.LOSESCREEN;
+            returnVariable = Constant.NumeroScreen.LOSESCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.OPTIONSCREEN) {
             sActualScreen = new OptionScreen(this);
-            i = Constant.NumeroScreen.OPTIONSCREEN;
+            returnVariable = Constant.NumeroScreen.OPTIONSCREEN;
         }
         else if (sScreen == Constant.NumeroScreen.SELECTSCREEN) {
             sActualScreen = new SelectScreen(this);
-            i = Constant.NumeroScreen.SELECTSCREEN;
+            returnVariable = Constant.NumeroScreen.SELECTSCREEN;
         }
         bSwitch = false;
-        return i;
+        return returnVariable;
     }
 
     // Standard getter for the variable nLvlMax

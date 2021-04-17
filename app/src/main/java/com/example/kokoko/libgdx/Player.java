@@ -133,7 +133,7 @@ public class Player implements Entity {
 
     // Activates the state to enable movement and defines the movement direction in world axis
     public int move(Constant.Direzioni dir) {
-        int i = 0;
+        int returnVariable = 0;
         if (canJump && !currentState.equals(State.JUMPING)) {
             switch (dir) {
                 case TOPLEFT:
@@ -143,7 +143,7 @@ public class Player implements Entity {
                     wasd = 1;
                     worldPos.x += 1;
                     currentState = State.JUMPING;
-                    i = 1;
+                    returnVariable = 1;
                     break;
                 case BOTTOMRIGHT:
                     bool_move = true;
@@ -152,7 +152,7 @@ public class Player implements Entity {
                     wasd = 2;
                     worldPos.x -= 1;
                     currentState = State.JUMPING;
-                    i = 2;
+                    returnVariable = 2;
                     break;
                 case BOTTOMLEFT:
                     bool_move = true;
@@ -161,7 +161,7 @@ public class Player implements Entity {
                     wasd = 3;
                     worldPos.y -= 1;
                     currentState = State.JUMPING;
-                    i = 3;
+                    returnVariable = 3;
                     break;
                 case TOPRIGHT:
                     bool_move = true;
@@ -170,13 +170,13 @@ public class Player implements Entity {
                     worldPos.y += 1;
                     wasd = 4;
                     currentState = State.JUMPING;
-                    i = 4;
+                    returnVariable = 4;
                     break;
                 default:
             }
 
         }
-        return i;
+        return returnVariable;
     }
 
     // Standard getter for the variable worldPos
