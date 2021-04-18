@@ -105,4 +105,8 @@ public class Constant {
 
     //GDX STRING
     public static final String NICK_NAME_STRING = "nickname";
+
+    //TILEMAP
+    public static final String REGEX = "\n";
+    public static final String SPACE = " ";
 }

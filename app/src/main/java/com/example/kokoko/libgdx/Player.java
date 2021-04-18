@@ -81,13 +81,6 @@ public class Player implements Entity {
     @Override
     public void update(float delta) {
 
-        if (currentState == previousState) {
-            time += delta;
-        }
-        else {
-            time = 0;
-        }
-
         timeControlVel += delta;
 
         if (startAnimMove) {
@@ -102,6 +95,7 @@ public class Player implements Entity {
                     pos.y += Constant.PLAYER_SPOS_INIT_Y;
                     camera.position.y += Constant.CAMERA_MOVEMENT_Y;
                     camera.position.x -= Constant.CAMERA_MOVEMENT_X;
+                    worldPos.x += 1;
                     wasd = 0;
                     break;
                 case 2:
@@ -109,6 +103,7 @@ public class Player implements Entity {
                     pos.y -= Constant.PLAYER_SPOS_INIT_Y;
                     camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
                     camera.position.x += Constant.CAMERA_MOVEMENT_X;
+                    worldPos.x -= 1;
                     wasd = 0;
                     break;
                 case 3:
@@ -116,6 +111,7 @@ public class Player implements Entity {
                     pos.y -= Constant.PLAYER_SPOS_INIT_Y;
                     camera.position.y -= Constant.CAMERA_MOVEMENT_Y;
                     camera.position.x -= Constant.CAMERA_MOVEMENT_X;
+                    worldPos.y -= 1;
                     wasd = 0;
                     break;
                 case 4:
@@ -123,6 +119,7 @@ public class Player implements Entity {
                     pos.y += Constant.PLAYER_SPOS_INIT_Y;
                     camera.position.y += Constant.CAMERA_MOVEMENT_Y;
                     camera.position.x += Constant.CAMERA_MOVEMENT_X;
+                    worldPos.y += 1;
                     wasd = 0;
                     break;
                 default:
@@ -141,8 +138,6 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 1;
-                    worldPos.x += 1;
-                    currentState = State.JUMPING;
                     returnVariable = 1;
                     break;
                 case BOTTOMRIGHT:
@@ -150,8 +145,6 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 2;
-                    worldPos.x -= 1;
-                    currentState = State.JUMPING;
                     returnVariable = 2;
                     break;
                 case BOTTOMLEFT:
@@ -159,17 +152,13 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 3;
-                    worldPos.y -= 1;
-                    currentState = State.JUMPING;
                     returnVariable = 3;
                     break;
                 case TOPRIGHT:
                     bool_move = true;
                     canJump = false;
                     timeControlVel = 0;
-                    worldPos.y += 1;
                     wasd = 4;
-                    currentState = State.JUMPING;
                     returnVariable = 4;
                     break;
                 default:

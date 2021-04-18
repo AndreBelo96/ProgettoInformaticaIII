@@ -1,6 +1,5 @@
 package com.example.kokoko.libgdx;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.example.kokoko.Constant;
@@ -65,11 +64,11 @@ public class Tilemap {
         int count_row = 0;
         int count_col = 0;
 
-        final String[] temp = bufferString.split("\n");
+        final String[] temp = bufferString.split(Constant.REGEX);
 
         count_col = (temp[0].length() + 1) / 2;
         for (int i = 0; i < temp.length; i++) {
-            map[count_row] = temp[count_row].split(" ");
+            map[count_row] = temp[count_row].split(Constant.SPACE);
             count_row++;
         }
         inputStream.close();
@@ -93,50 +92,53 @@ public class Tilemap {
         }
     }
 
-    public void fillObject() throws IOException{
-        InputStream is = gameClass.assetManager.open(arrowDir());
-        int size = is.available();
-        byte[] buffer = new byte[size];
-        is.read(buffer);
+    public void fillObject() throws IOException {
+        final InputStream inputStream = gameClass.assetManager.open(arrowDir());
+        final int size = inputStream.available();
+        final byte[] buffer = new byte[size];
+        inputStream.read(buffer);
 
-        String s  = new String(buffer);
-        int count_row = 0;
+        final String s = new String(buffer);
+        int countRow = 0;
         int count_col = 0;
 
-        String[] temp = s.split("\n");
+        final String[] temp = s.split(Constant.REGEX);
 
-        count_col = (temp[0].length()+1)/2;
-        for(int i = 0; i < temp.length ; i++){
-            arrowMap[count_row] = temp[count_row].split(" ");
-            count_row++;
+        count_col = (temp[0].length() + 1) / 2;
+        for (int i = 0; i < temp.length; i++) {
+            arrowMap[countRow] = temp[countRow].split(Constant.SPACE);
+            countRow++;
         }
-        is.close();
+        inputStream.close();
 
         arrowMap[0][0] = "0"; // per mettere il player
-        for(int row = count_row-1; row >= 0; row--){
-            for(int col = count_col-1; col >= 0; col--){
+        for (int row = countRow - 1; row >= 0; row--) {
+            for (int col = count_col - 1; col >= 0; col--) {
                 //serve per la visuale isometrica
-                float x = ((row - col) * (Constant.TILE_SPOS_INIT_X)) + Constant.TILE_WIDHT/2 - Constant.ARROW_WIDHT / 2;
-                float y = ((col + row) * (Constant.TILE_SPOS_INIT_Y)) + Constant.TILE_HEIGHT/2 - Constant.ARROW_HEIGHT / 2 + Constant.BORDER_HEIGHT / 2;
+                final float x = ((row - col) * (Constant.TILE_SPOS_INIT_X)) + Constant.TILE_WIDHT / 2 - Constant.ARROW_WIDHT / 2;
+                final float y = ((col + row) * (Constant.TILE_SPOS_INIT_Y)) + Constant.TILE_HEIGHT / 2 - Constant.ARROW_HEIGHT / 2 + Constant.BORDER_HEIGHT / 2;
 
-                if(arrowMap[row][col].contains("1"))
-                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.TOPLEFT));
-                else if(arrowMap[row][col].contains("2"))
-                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.TOPRIGHT));
-                else if(arrowMap[row][col].contains("3"))
-                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.BOTTOMRIGHT));
-                else if(arrowMap[row][col].contains("4"))
-                    arrows.add(new Arrow(new Vector2(row,col), new Vector2(x,y), Constant.Direzioni.BOTTOMLEFT));
+                if (arrowMap[row][col].contains("1")) {
+                    arrows.add(new Arrow(new Vector2(row, col), new Vector2(x, y), Constant.Direzioni.TOPLEFT));
+                }
+                else if (arrowMap[row][col].contains("2")) {
+                    arrows.add(new Arrow(new Vector2(row, col), new Vector2(x, y), Constant.Direzioni.TOPRIGHT));
+                }
+                else if (arrowMap[row][col].contains("3")) {
+                    arrows.add(new Arrow(new Vector2(row, col), new Vector2(x, y), Constant.Direzioni.BOTTOMRIGHT));
+                }
+                else if (arrowMap[row][col].contains("4")) {
+                    arrows.add(new Arrow(new Vector2(row, col), new Vector2(x, y), Constant.Direzioni.BOTTOMLEFT));
+                }
             }
         }
     }
-
 
     private static String mapdir() {
         return Tilemap.map_prefix + Tilemap.mapNum + Tilemap.map_filetype;
     }
 
-    private static String arrowDir(){
+    private static String arrowDir() {
         return Tilemap.arrow_prefix + Tilemap.mapNum + Tilemap.map_filetype;
     }
 }
