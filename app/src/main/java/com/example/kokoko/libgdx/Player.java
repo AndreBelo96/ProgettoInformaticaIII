@@ -81,6 +81,13 @@ public class Player implements Entity {
     @Override
     public void update(float delta) {
 
+        if (currentState == previousState) {
+            time += delta;
+        }
+        else {
+            time = 0;
+        }
+
         timeControlVel += delta;
 
         if (startAnimMove) {
@@ -138,6 +145,7 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 1;
+                    currentState = State.JUMPING;
                     returnVariable = 1;
                     break;
                 case BOTTOMRIGHT:
@@ -145,6 +153,7 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 2;
+                    currentState = State.JUMPING;
                     returnVariable = 2;
                     break;
                 case BOTTOMLEFT:
@@ -152,6 +161,7 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 3;
+                    currentState = State.JUMPING;
                     returnVariable = 3;
                     break;
                 case TOPRIGHT:
@@ -159,6 +169,7 @@ public class Player implements Entity {
                     canJump = false;
                     timeControlVel = 0;
                     wasd = 4;
+                    currentState = State.JUMPING;
                     returnVariable = 4;
                     break;
                 default:
