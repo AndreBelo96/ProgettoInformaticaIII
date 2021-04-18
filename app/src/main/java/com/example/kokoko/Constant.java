@@ -102,4 +102,7 @@ public class Constant {
     public static final int IDLE_SLIME_REGION = 11;
     public static final int MOVE_SLIME_REGION = 28;
     public static final float SLIME_FRAME_DURATION = 5f;
+
+    //GDX STRING
+    public static final String NICK_NAME_STRING = "nickname";
 }

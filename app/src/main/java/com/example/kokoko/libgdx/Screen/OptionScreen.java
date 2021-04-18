@@ -70,11 +70,11 @@ public class OptionScreen extends AbstractScreens implements Screen {
         Gdx.input.setInputProcessor(this.stage);
     }
 
-    private void setButtons(){
+    private void setButtons() {
 
         namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 + 100, 200, 100);
         changeNickButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2, 400, 100);
-        soundButton.setBounds(Gdx.graphics.getWidth() / 2 - 200,Gdx.graphics.getHeight() / 2 - 100, 400, 100);
+        soundButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 100, 400, 100);
         controllerButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 200, 400, 100);
         resetButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 300, 400, 100);
         backButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 400, 400, 100);
@@ -83,10 +83,10 @@ public class OptionScreen extends AbstractScreens implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameClass.setNickName(namePlayer.getText());
-                gameClass.prefs.putString("nickname", gameClass.getNickName());
+                gameClass.prefs.putString(Constant.NICK_NAME_STRING, gameClass.getNickName());
                 gameClass.prefs.flush();
             }
-        } );
+        });
 
         controllerButton.addListener(new ClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class OptionScreen extends AbstractScreens implements Screen {
             }
         });
 
-        soundButton.addListener(new ClickListener(){
+        soundButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameClass.setSound(!gameClass.isSound());
@@ -108,14 +108,14 @@ public class OptionScreen extends AbstractScreens implements Screen {
                 gameClass.setnLvlMax(0);
                 gameClass.setNumLvl(1);
                 gameClass.setPunteggio(0);
-                gameClass.prefs.putString("nickname", gameClass.getNickName());
+                gameClass.prefs.putString(Constant.NICK_NAME_STRING, gameClass.getNickName());
                 gameClass.prefs.putInteger("nLvl", gameClass.getnLvlMax());
                 gameClass.prefs.putInteger("punteggio", gameClass.getPunteggio());
                 gameClass.prefs.flush();
             }
         });
 
-        controllerButton.addListener(new ClickListener(){
+        controllerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
             }
