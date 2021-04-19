@@ -3,10 +3,7 @@ package com.example.kokoko.libgdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.example.kokoko.Constant;
-
 import org.junit.jupiter.api.Test;
-
-import static com.google.common.base.Verify.verify;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrowTest {
