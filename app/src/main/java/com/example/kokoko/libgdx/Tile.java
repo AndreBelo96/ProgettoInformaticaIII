@@ -13,8 +13,8 @@ public class Tile extends Sprite {
     public Vector2 worldPos;
     public boolean onBoolean;
     //private
-    private Texture tileOn;
-    private Texture tileOff;
+    public Texture tileOn;
+    public Texture tileOff;
 
     public Tile(Vector2 tileMapPos, Vector2 worldPos, boolean onBoolean) {
         this.tileMapPos = tileMapPos;
@@ -24,12 +24,14 @@ public class Tile extends Sprite {
         this.onBoolean = onBoolean;
     }
 
-    public void render(SpriteBatch batch) {
+    public boolean render(SpriteBatch batch) {
         if (onBoolean) {
             batch.draw(tileOn, worldPos.x, worldPos.y, Constant.TILE_WIDHT, Constant.TILE_HEIGHT);
+            return onBoolean;
         }
         else {
             batch.draw(tileOff, worldPos.x, worldPos.y, Constant.TILE_WIDHT, Constant.TILE_HEIGHT);
+            return onBoolean;
         }
     }
 }

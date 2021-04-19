@@ -24,18 +24,22 @@ public class Arrow extends Sprite {
         this.arrow = new Texture("arrow.png");
     }
 
-    public void render(SpriteBatch batch) {
+    public Constant.Direzioni render(SpriteBatch batch) {
         if (direzione == Constant.Direzioni.BOTTOMRIGHT) {
             batch.draw(arrow, worldPos.x, worldPos.y, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, 0, 0, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, false, false);
+            return Constant.Direzioni.BOTTOMRIGHT;
         }
         else if (direzione == Constant.Direzioni.TOPRIGHT) {
             batch.draw(arrow, worldPos.x, worldPos.y, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, 0, 0, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, false, true);
+            return Constant.Direzioni.TOPRIGHT;
         }
         else if (direzione == Constant.Direzioni.BOTTOMLEFT) {
             batch.draw(arrow, worldPos.x, worldPos.y, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, 0, 0, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, true, false);
+            return Constant.Direzioni.BOTTOMLEFT;
         }
-        else if (direzione == Constant.Direzioni.TOPLEFT) {
+        else {
             batch.draw(arrow, worldPos.x, worldPos.y, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, 0, 0, Constant.ARROW_WIDHT, Constant.ARROW_HEIGHT, true, true);
+            return Constant.Direzioni.TOPLEFT;
         }
     }
 

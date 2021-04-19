@@ -92,7 +92,7 @@ public class Tilemap {
         }
     }
 
-    public void fillObject() throws IOException {
+    private void fillObject() throws IOException {
         final InputStream inputStream = gameClass.assetManager.open(arrowDir());
         final int size = inputStream.available();
         final byte[] buffer = new byte[size];

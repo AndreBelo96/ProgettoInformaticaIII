@@ -31,7 +31,7 @@ public class Player implements Entity {
     private Animation<TextureRegion> move;
     private Animation<TextureRegion> idle;
     private GameScreen screen;
-    private float time;
+    public float time;
     private float animationMoveTime;
     private float timeControlVel;
     private boolean bool_move;
@@ -58,7 +58,7 @@ public class Player implements Entity {
         startAnimMove = false;
         bool_move = false;
         // The animation frames are parsed from the sprite which cointains all the frames based on the x position
-        frames = new Array<TextureRegion>();
+        /*frames = new Array<TextureRegion>();
         for (int i = 0; i < Constant.IDLE_SLIME_REGION; i++) {
             frames.add(new TextureRegion(this.screen.getAtlas().findRegion(Constant.SLIME_REGION), i * Constant.PLAYER_WIDHT, 0, Constant.PLAYER_WIDHT, Constant.PLAYER_HEIGHT));
         }
@@ -68,7 +68,7 @@ public class Player implements Entity {
             frames.add(new TextureRegion(this.screen.getAtlas().findRegion(Constant.SLIME_REGION), i * Constant.PLAYER_WIDHT, 0, Constant.PLAYER_WIDHT, Constant.PLAYER_HEIGHT));
         }
         move = new Animation(Constant.SLIME_FRAME_DURATION, frames, Animation.PlayMode.NORMAL);
-        frames.clear();
+        frames.clear();*/
     }
 
     // The batch draws a rectangle based on the setRegion and the position given to the player

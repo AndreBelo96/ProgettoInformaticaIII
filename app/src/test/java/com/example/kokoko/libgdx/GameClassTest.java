@@ -17,7 +17,7 @@ class GameClassTest {
     private static final Constant.NumeroScreen OS = Constant.NumeroScreen.OPTIONSCREEN;
     private static final Constant.NumeroScreen WS = Constant.NumeroScreen.WINSCREEN;
     @Mock
-    private GameClass gc = Mockito.spy(GameClass.class);
+    private GameClass gc = Mockito.mock(GameClass.class);
 
     @Test
     void testCreate(){
