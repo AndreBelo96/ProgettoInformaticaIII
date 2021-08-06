@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 
 /** classi costanti */
 public class Constant {
+    // BACKGROUND
+    public static final int RECT_WIDHT = 20;
+    public static final int RECT_HEIGHT = 20;
+
     //WORLD
     public static final int WIDTH = Gdx.graphics.getWidth();
     public static final int HEIGHT = Gdx.graphics.getHeight();

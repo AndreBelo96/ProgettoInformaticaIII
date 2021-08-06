@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.GameClass;
+import com.example.kokoko.libgdx.Rectangle;
 import com.google.firebase.auth.FirebaseAuth;
 
 /** Classe per lo screen del menu */
@@ -32,6 +34,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
     private Label namePlayer;
     private final Preferences prefs;
     private Texture title;
+    private Rectangle[][] rectMat;
 
     public MenuScreen(final GameClass gameClass) {
 
@@ -42,6 +45,16 @@ public class MenuScreen extends AbstractScreens implements Screen {
         prefs = Gdx.app.getPreferences("Zawardo");
 
         title = new Texture(Gdx.files.internal("Titolo.png"));
+
+        rectMat = new Rectangle[5][4];
+
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 4; j++) {
+                if (i % 2 == 0)
+                    rectMat[i][j] = new Rectangle(new Vector2(j * Constant.WIDTH / 4, i * Constant.HEIGHT / 4));
+                else
+                    rectMat[i][j] = new Rectangle(new Vector2((Constant.WIDTH / 8) + (j * Constant.WIDTH / 4), i * Constant.HEIGHT / 4));
+            }
 
         playButton = new TextButton("Play", skin);
         optionButton = new TextButton("Option", skin);
