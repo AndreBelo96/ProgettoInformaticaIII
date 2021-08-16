@@ -34,7 +34,7 @@ public class MenuScreen extends AbstractScreens implements Screen {
     private Label namePlayer;
     private final Preferences prefs;
     private Texture title;
-    private Rectangle[][] rectMat;
+    //private Rectangle[][] rectMat;
 
     public MenuScreen(final GameClass gameClass) {
 
@@ -46,15 +46,15 @@ public class MenuScreen extends AbstractScreens implements Screen {
 
         title = new Texture(Gdx.files.internal("Titolo.png"));
 
-        rectMat = new Rectangle[5][4];
+        //rectMat = new Rectangle[5][4];
 
-        for (int i = 0; i < 5; i++)
+        /*for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++) {
                 if (i % 2 == 0)
                     rectMat[i][j] = new Rectangle(new Vector2(j * Constant.WIDTH / 4, i * Constant.HEIGHT / 4));
                 else
                     rectMat[i][j] = new Rectangle(new Vector2((Constant.WIDTH / 8) + (j * Constant.WIDTH / 4), i * Constant.HEIGHT / 4));
-            }
+            }*/
 
         playButton = new TextButton("Play", skin);
         optionButton = new TextButton("Option", skin);
