@@ -15,4 +15,6 @@ public abstract class AbstractScreens extends ScreenAdapter implements Screen {
         batch.dispose();
     }
 
+
+
 }

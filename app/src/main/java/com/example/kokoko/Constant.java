@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 
 /** classi costanti */
 public class Constant {
-    // BACKGROUND
-    public static final int RECT_WIDHT = 20;
-    public static final int RECT_HEIGHT = 20;
+    public static final float RECT_HEIGHT = 25;
 
     //WORLD
-    public static final int WIDTH = Gdx.graphics.getWidth();
-    public static final int HEIGHT = Gdx.graphics.getHeight();
+    public static final float WIDTH = Gdx.graphics.getWidth();
+    public static final float HEIGHT = Gdx.graphics.getHeight();
     public static final int NUMERO_PIXEL_X = 288;
     public static final int NUMERO_PIXEL_Y = 96;
 
@@ -87,7 +85,8 @@ public class Constant {
         LOSESCREEN,
         OPTIONSCREEN,
         SCOREBOARDSCREEN,
-        SELECTSCREEN
+        SELECTSCREEN,
+        BACKGROUNDOPTION
     }
 
     //ACTIVITY CONSTANT STRING

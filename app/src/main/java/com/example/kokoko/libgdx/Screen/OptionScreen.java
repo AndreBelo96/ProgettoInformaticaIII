@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
+import com.example.kokoko.libgdx.Background;
 import com.example.kokoko.libgdx.GameClass;
 
 /** Classe per lo screen delle opzioni */
@@ -27,10 +28,12 @@ public class OptionScreen extends AbstractScreens implements Screen {
     private TextButton soundButton;
     private TextButton resetButton;
     private TextButton controllerButton;
+    private TextButton backgroundButton;
     private TextField namePlayer;
     private Stage stage;
     private final Preferences prefs;
     private Texture title;
+    private Background rectBK;
 
     public OptionScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
@@ -38,11 +41,13 @@ public class OptionScreen extends AbstractScreens implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin.json"));
         prefs = Gdx.app.getPreferences("Zawardo");
+        rectBK = new Background();
 
         changeNickButton = new TextButton("Change Nickname", skin);
         soundButton = new TextButton("Sound", skin);
         resetButton = new TextButton("Reset Account", skin);
         controllerButton = new TextButton("Controller Type", skin);
+        backgroundButton = new TextButton("Background", skin);
         namePlayer = new TextField(GameClass.getNickName(), skin);
         backButton = new TextButton("Back", skin);
 
@@ -50,6 +55,7 @@ public class OptionScreen extends AbstractScreens implements Screen {
         soundButton.getLabel().setFontScale(3);
         resetButton.getLabel().setFontScale(3);
         controllerButton.getLabel().setFontScale(3);
+        backgroundButton.getLabel().setFontScale(3);
         namePlayer.getStyle().font.getData().setScale(3);
         backButton.getLabel().setFontScale(3);
 
@@ -63,6 +69,7 @@ public class OptionScreen extends AbstractScreens implements Screen {
         stage.addActor(changeNickButton);
         stage.addActor(soundButton);
         stage.addActor(controllerButton);
+        stage.addActor(backgroundButton);
         stage.addActor(resetButton);
         stage.addActor(namePlayer);
         stage.addActor(backButton);
@@ -72,12 +79,13 @@ public class OptionScreen extends AbstractScreens implements Screen {
 
     private void setButtons() {
 
-        namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 + 100, 200, 100);
-        changeNickButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2, 400, 100);
-        soundButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 100, 400, 100);
-        controllerButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 200, 400, 100);
-        resetButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 300, 400, 100);
-        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 400, 400, 100);
+        namePlayer.setBounds(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 + 100, 300, 125);
+        changeNickButton.setBounds(Gdx.graphics.getWidth() / 2 - 800, Gdx.graphics.getHeight() / 2, 650, 100);
+        soundButton.setBounds(Gdx.graphics.getWidth() / 2 - 800, Gdx.graphics.getHeight() / 2 - 150, 650, 100);
+        controllerButton.setBounds(Gdx.graphics.getWidth() / 2 - 800, Gdx.graphics.getHeight() / 2 - 300, 650, 100);
+        resetButton.setBounds(Gdx.graphics.getWidth() / 2 + 150, Gdx.graphics.getHeight() / 2, 650, 100);
+        backgroundButton.setBounds(Gdx.graphics.getWidth() / 2 + 150, Gdx.graphics.getHeight() / 2 - 150, 650, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 - 450, 300, 100);
 
         changeNickButton.addListener(new ClickListener() {
             @Override
@@ -115,6 +123,14 @@ public class OptionScreen extends AbstractScreens implements Screen {
             }
         });
 
+        backgroundButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gameClass.setsScreen(Constant.NumeroScreen.BACKGROUNDOPTION);
+                gameClass.setbSwitch(true);
+            }
+        });
+
         controllerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -132,14 +148,17 @@ public class OptionScreen extends AbstractScreens implements Screen {
 
     @Override
     public void render(float deltaTime) {
-        Gdx.gl.glClearColor(0.9f, 0.2f, 0.1f, 1);
+        Gdx.gl.glClearColor(0.6f, 0.3f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameClass.batch.setProjectionMatrix(camera.combined);
 
         gameClass.batch.begin();
-        gameClass.batch.draw(title, -0.47f, .5f, 0.94f, 0.45f);
+        rectBK.render(gameClass.batch);
+        gameClass.batch.draw(title, -0.47f, .5f, 0.9f, 0.45f);
         gameClass.batch.end();
+
+        rectBK.moveRect();
 
         stage.draw();
         stage.act();

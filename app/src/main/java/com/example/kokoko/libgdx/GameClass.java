@@ -7,6 +7,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.example.kokoko.Constant;
 import com.example.kokoko.android.activities.GdxActivity;
+import com.example.kokoko.libgdx.Screen.BackGroundScreen;
 import com.example.kokoko.libgdx.Screen.GameScreen;
 import com.example.kokoko.libgdx.Screen.LoseScreen;
 import com.example.kokoko.libgdx.Screen.MenuScreen;
@@ -29,6 +30,7 @@ public class GameClass extends ApplicationAdapter {
     private static int numLvl;
     private static String nickName;
     private static boolean sound;
+    private static boolean dynamicBkgrd;
     // Variables to change the different type on Screen in LibGdx
     private AbstractScreens sActualScreen;
     private Constant.NumeroScreen sScreen;
@@ -51,6 +53,7 @@ public class GameClass extends ApplicationAdapter {
         punteggio = prefs.getInteger("punteggio", 0);
         nickName = prefs.getString("nickname", "Guest");
         sound = prefs.getBoolean("sound", true);
+        dynamicBkgrd = prefs.getBoolean("isDynamicBkgrd", true);
         numLvl = 0;
         
         // An instance of the MenuScreen is added to this to class as the starting screen and the screen options are initialized
@@ -117,6 +120,10 @@ public class GameClass extends ApplicationAdapter {
             sActualScreen = new SelectScreen(this);
             returnVariable = Constant.NumeroScreen.SELECTSCREEN;
         }
+        else if (sScreen == Constant.NumeroScreen.BACKGROUNDOPTION) {
+            sActualScreen = new BackGroundScreen(this);
+            returnVariable = Constant.NumeroScreen.BACKGROUNDOPTION;
+        }
         bSwitch = false;
         return returnVariable;
     }
@@ -176,6 +183,14 @@ public class GameClass extends ApplicationAdapter {
     // Setter for the boolean variable sound
     public static void setSound(boolean sound) {
         GameClass.sound = sound;
+    }
+
+    public static boolean isDynamicBkgrd() {
+        return dynamicBkgrd;
+    }
+
+    public static void setDynamicBkgrd(boolean dynamicBkgrd) {
+        GameClass.dynamicBkgrd = dynamicBkgrd;
     }
 
 }

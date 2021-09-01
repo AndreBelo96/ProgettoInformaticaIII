@@ -7,6 +7,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -36,6 +37,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
     private boolean end;
     private String[] nomi;
     private int[] punti;
+    private Texture title;
 
     public ScoreboardScreen(final GameClass gameClass) {
 
@@ -55,6 +57,8 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         classifica = new Label[punti.length];
         nPlayer = classifica.length;
         end = false;
+
+        title = new Texture(Gdx.files.internal("scoreboard.png"));
 
         backButton.getLabel().setFontScale(3);
         prevButton.getLabel().setFontScale(3);
@@ -140,6 +144,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
 
         gameClass.batch.setProjectionMatrix(camera.combined);
         gameClass.batch.begin();
+        gameClass.batch.draw(title, -0.47f, .5f, 0.94f, 0.45f);
         gameClass.batch.end();
         stage.draw();
         stage.act();
