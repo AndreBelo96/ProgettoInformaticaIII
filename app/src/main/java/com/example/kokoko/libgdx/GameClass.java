@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.example.kokoko.Constant;
 import com.example.kokoko.android.activities.GdxActivity;
@@ -31,6 +32,8 @@ public class GameClass extends ApplicationAdapter {
     private static String nickName;
     private static boolean sound;
     private static boolean dynamicBkgrd;
+    private static boolean bkgrndType;
+    private static String rectColor;
     // Variables to change the different type on Screen in LibGdx
     private AbstractScreens sActualScreen;
     private Constant.NumeroScreen sScreen;
@@ -54,6 +57,8 @@ public class GameClass extends ApplicationAdapter {
         nickName = prefs.getString("nickname", "Guest");
         sound = prefs.getBoolean("sound", true);
         dynamicBkgrd = prefs.getBoolean("isDynamicBkgrd", true);
+        bkgrndType = prefs.getBoolean("isBkgrndRotating", true);
+        rectColor = prefs.getString("rectColor", "WHITE");
         numLvl = 0;
         
         // An instance of the MenuScreen is added to this to class as the starting screen and the screen options are initialized
@@ -191,6 +196,22 @@ public class GameClass extends ApplicationAdapter {
 
     public static void setDynamicBkgrd(boolean dynamicBkgrd) {
         GameClass.dynamicBkgrd = dynamicBkgrd;
+    }
+
+    public static boolean getBkgrndType() {
+        return bkgrndType;
+    }
+
+    public static void setBkgrndType(boolean bkgrndType) {
+        GameClass.bkgrndType = bkgrndType;
+    }
+
+    public static String getRectColor() {
+        return rectColor;
+    }
+
+    public static void setRectColor(String rectColor) {
+        GameClass.rectColor = rectColor;
     }
 
 }

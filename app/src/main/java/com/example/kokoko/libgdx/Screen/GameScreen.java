@@ -1,8 +1,11 @@
 package com.example.kokoko.libgdx.Screen;
 
+import android.util.Log;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.Arrow;
+import com.example.kokoko.libgdx.Background;
 import com.example.kokoko.libgdx.GameClass;
 import com.example.kokoko.libgdx.Player;
 import com.example.kokoko.libgdx.Tile;
@@ -39,6 +43,7 @@ public class GameScreen extends AbstractScreens implements Screen {
     private Actor moveUpLeftActor;
     private Actor moveBottomRightActor;
     private Actor moveBottomLeftActor;
+    private Background rectBK;
 
     public GameScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
@@ -50,7 +55,7 @@ public class GameScreen extends AbstractScreens implements Screen {
 
         bool_switch = false;
         bool_win = false;
-
+        rectBK = new Background();
         stage = new Stage();
         stage.clear();
 
@@ -143,7 +148,7 @@ public class GameScreen extends AbstractScreens implements Screen {
     public void render(float deltaTime) {
         deltaTime++;
         //pulisco lo screen
-        Gdx.gl.glClearColor(0.5f, 0.3f, 0.3f, 0);
+        Gdx.gl.glClearColor(0.65f, 0.65f, 0.65f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // disegno sulla camera
         gameClass.batch.setProjectionMatrix(camera.combined);
@@ -163,9 +168,24 @@ public class GameScreen extends AbstractScreens implements Screen {
         camera.update();
 
         gameClass.batch.begin();
+        gameClass.batch.setColor(StringToColor(gameClass.getRectColor()));
+        rectBK.render(gameClass.batch);
+        gameClass.batch.setColor(Color.WHITE);
         map.render(gameClass.batch);
         player.render(gameClass.batch);
         gameClass.batch.end();
+
+        if (gameClass.isDynamicBkgrd()) {
+            rectBK.moveRect();
+            rectBK.resetRect();
+        } else
+            Log.i("MenuScreen SCREEN:" , "No movement");
+
+        if (gameClass.getBkgrndType()) {
+            rectBK.rotateYRect();
+            rectBK.rotateXRect();
+        } else
+            Log.i("MenuScreen SCREEN:" , "No rotation");
 
         for (Tile t : map.base) {
             if (!t.onBoolean) {
@@ -263,6 +283,24 @@ public class GameScreen extends AbstractScreens implements Screen {
 
     private GameScreen getGameScreen() {
         return this;
+    }
+
+    private Color StringToColor(String s) {
+        switch (s) {
+            case "WHITE":
+                return Color.WHITE;
+            case "GOLD":
+                return Color.GOLD;
+            case "RED":
+                return Color.RED;
+            case "BLUE":
+                return Color.BLUE;
+            case "BLACK":
+                return Color.BLACK;
+            default:
+                return Color.WHITE;
+        }
+
     }
 
 }

@@ -24,11 +24,32 @@ public class Background {
     public void render(SpriteBatch batch) {
         for (Rectangle[] rect: rectMat)
             for (Rectangle elem: rect) {
-                elem.render(batch); //controlla che funzioni o se devi cambiare metodo
+                elem.render(batch);
             }
     }
 
     public void moveRect() {
+        for (Rectangle[] rect: rectMat)
+            for (Rectangle elem: rect) {
+                elem.move();
+            }
+    }
+
+    public void rotateXRect() {
+        for (Rectangle[] rect: rectMat)
+            for (Rectangle elem: rect) {
+                elem.rotateX();
+            }
+    }
+
+    public void rotateYRect() {
+        for (Rectangle[] rect: rectMat)
+            for (Rectangle elem: rect) {
+                elem.rotateY();
+            }
+    }
+
+    public void resetRect() {
         for (Rectangle[] rect: rectMat) {
             if (rect[0].getRectPos().y > ((Constant.HEIGHT) + Constant.RECT_HEIGHT / 2) / 1000) {
                 int j = 0;

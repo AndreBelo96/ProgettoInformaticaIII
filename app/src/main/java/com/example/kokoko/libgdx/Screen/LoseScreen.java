@@ -29,7 +29,7 @@ public class LoseScreen extends AbstractScreens implements Screen {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
         final TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        font = new BitmapFont(Gdx.files.internal("roboto_light.fnt"));
+        font = new BitmapFont(Gdx.files.internal("Immortal.fnt"));
         font.setColor(Color.WHITE);
         style.font = font;
         falseButton = new TextButton(Constant.LOSE_TEXT, style);
@@ -37,10 +37,10 @@ public class LoseScreen extends AbstractScreens implements Screen {
         backButton = new TextButton(Constant.BACK_TEXT, style);
         exitButton = new TextButton(Constant.EXIT_TEXT, style);
 
-        falseButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() - 200, 200, 100);
-        reloadButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 50, 200, 100);
-        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 250, 200, 100);
-        exitButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
+        falseButton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() - 200, 200, 100);
+        reloadButton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 50, 200, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 250, 200, 100);
+        exitButton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 350, 200, 100);
 
         reloadButton.addListener(new ClickListener() {
             @Override

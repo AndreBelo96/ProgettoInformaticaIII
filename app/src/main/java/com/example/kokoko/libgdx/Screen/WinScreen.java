@@ -25,7 +25,7 @@ public class WinScreen extends AbstractScreens implements Screen {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
         final TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = new BitmapFont(Gdx.files.internal("roboto_light.fnt"));
+        style.font = new BitmapFont(Gdx.files.internal("Immortal.fnt"));
         style.font.setColor(Color.WHITE);
 
         //dichiarazione tasti
@@ -35,11 +35,11 @@ public class WinScreen extends AbstractScreens implements Screen {
         final TextButton backButton = new TextButton(Constant.BACK_TEXT, style);
         final TextButton exitbutton = new TextButton(Constant.EXIT_TEXT, style);
 
-        falsebutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() - 200, 200, 100);
-        reloadbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 50, 200, 100);
-        nextbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 150, 200, 100);
-        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 250, 200, 100);
-        exitbutton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 350, 200, 100);
+        falsebutton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() - 200, 200, 100);
+        reloadbutton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 50, 200, 100);
+        nextbutton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 150, 200, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 250, 200, 100);
+        exitbutton.setBounds(Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 350, 200, 100);
 
         //dichiaro i listener
         reloadbutton.addListener(new ClickListener() {

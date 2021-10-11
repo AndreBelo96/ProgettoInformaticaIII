@@ -5,6 +5,7 @@ import android.util.Log;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
+import com.example.kokoko.libgdx.Background;
 import com.example.kokoko.libgdx.GameClass;
 
 /** Classe per lo scoreboard */
@@ -24,20 +26,21 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
     private static final int TEXT_WIDTH = 800;
 
     public GameClass gameClass;
-    private Skin skin;
-    private OrthographicCamera camera;
-    private TextButton backButton;
-    private TextButton prevButton;
-    private TextButton nextButton;
-    private Label[] classifica;
-    private Stage stage;
+    private final Skin skin;
+    private final OrthographicCamera camera;
+    private final TextButton backButton;
+    private final TextButton prevButton;
+    private final TextButton nextButton;
+    private final Label[] classifica;
+    private final Stage stage;
     private final Preferences prefs;
     private int nPlayer;
     private int moltiplicatore;
     private boolean end;
-    private String[] nomi;
-    private int[] punti;
-    private Texture title;
+    private final String[] nomi;
+    private final int[] punti;
+    private final Texture title;
+    private final Background rectBK;
 
     public ScoreboardScreen(final GameClass gameClass) {
 
@@ -50,6 +53,8 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin.json"));
         prefs = Gdx.app.getPreferences("Zawardo");
+
+        rectBK = new Background();
 
         backButton = new TextButton(Constant.BACK_TEXT, skin);
         prevButton = new TextButton(Constant.PREVIOUS_TEXT, skin);
@@ -67,7 +72,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         mergeSort(punti, nomi, 0, classifica.length - 1);
 
         for (int i = 0; i < classifica.length; i++) {
-            classifica[i] = new Label("Posizione " + (i + 1) + ": " + nomi[i] + " punti: " + " " + punti[i], skin);
+            classifica[i] = new Label("Position " + (i + 1) + ": " + nomi[i] + ", points: " + " " + punti[i], skin);
             classifica[i].getStyle().font.getData().setScale(3);
         }
 
@@ -92,9 +97,9 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
 
     private void setButton() {
         //set Position
-        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 425, 400, 150);
-        prevButton.setBounds(Gdx.graphics.getWidth() / 2 - 400, Gdx.graphics.getHeight() / 2 - 400, 100, 100);
-        nextButton.setBounds(Gdx.graphics.getWidth() / 2 + 300, Gdx.graphics.getHeight() / 2 - 400, 100, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 425, 400, 150);
+        prevButton.setBounds(Gdx.graphics.getWidth() / 2f - 400, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
+        nextButton.setBounds(Gdx.graphics.getWidth() / 2f + 300, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
         //set listeners
         backButton.addListener(new ClickListener() {
             @Override
@@ -139,13 +144,32 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
 
     @Override
     public void render(float dt) {
-        Gdx.gl.glClearColor(0.9f, 0.2f, 0.1f, 1);
+        Gdx.gl.glClearColor(0.65f, 0.65f, 0.65f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameClass.batch.setProjectionMatrix(camera.combined);
+
         gameClass.batch.begin();
-        gameClass.batch.draw(title, -0.47f, .5f, 0.94f, 0.45f);
+        gameClass.batch.setColor(StringToColor(gameClass.getRectColor()));
+        rectBK.render(gameClass.batch);
+        gameClass.batch.setColor(Color.WHITE);
+        gameClass.batch.draw(title, -0.47f, .51f, 0.9f, 0.45f);
         gameClass.batch.end();
+
+        if (gameClass.isDynamicBkgrd()) {
+            rectBK.moveRect();
+            rectBK.resetRect();
+        }
+        else
+            Log.i("MenuScreen SCREEN:" , "No movement");
+
+        if (gameClass.getBkgrndType()) {
+            rectBK.rotateYRect();
+            rectBK.rotateXRect();
+        }
+        else
+            Log.i("MenuScreen SCREEN:" , "No rotation");
+
         stage.draw();
         stage.act();
     }
@@ -211,7 +235,7 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
 
     private void createScoreboard(int number, Label[] classifica) {
         for (int i = 0; i < Math.min(nPlayer, Constant.NUM_FOR_PAGES); i++) {
-            classifica[number + i].setBounds(Gdx.graphics.getWidth() / 2 - TEXT_WIDTH / 2, Gdx.graphics.getHeight() - (350 + (i * 100)), TEXT_WIDTH, 150);
+            classifica[number + i].setBounds(300, Gdx.graphics.getHeight() - (375 + (i * 100)), TEXT_WIDTH, 150);
 
             if (nPlayer <= Constant.NUM_FOR_PAGES) {
                 end = true;
@@ -221,6 +245,24 @@ public class ScoreboardScreen extends AbstractScreens implements Screen {
         stage.addActor(backButton);
         stage.addActor(prevButton);
         stage.addActor(nextButton);
+
+    }
+
+    private Color StringToColor(String s) {
+        switch (s) {
+            case "WHITE":
+                return Color.WHITE;
+            case "GOLD":
+                return Color.GOLD;
+            case "RED":
+                return Color.RED;
+            case "BLUE":
+                return Color.BLUE;
+            case "BLACK":
+                return Color.BLACK;
+            default:
+                return Color.WHITE;
+        }
 
     }
 }

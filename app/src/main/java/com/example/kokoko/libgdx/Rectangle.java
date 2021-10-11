@@ -33,36 +33,45 @@ public class Rectangle {
 
     public void render(SpriteBatch batch) {
         batch.draw(rectTexture, rectPos.x, rectPos.y, RECT_WIDHT / 100f, RECT_HEIGHT / 100f);
-        move();
-        rotateX();
-        rotateY();
     }
 
-    public void move(){
+    public void move() {
             rectPos.x = rectPos.x + rectVel.x;
             rectPos.y = rectPos.y + rectVel.y;
     }
 
     public void rotateX() {
-        if (RECT_WIDHT > 0 && !grow)
+        if (RECT_WIDHT > 0 && !grow) {
             RECT_WIDHT -= 0.1f;
-        else if (RECT_WIDHT < 14 && grow)
+            rectPos.x += 0.0005f;
+        }
+        else if (RECT_WIDHT < 14 && grow) {
             RECT_WIDHT += 0.1f;
-        else if (RECT_WIDHT <= 0)
+            rectPos.x -= 0.0005f;
+        }
+        else if (RECT_WIDHT <= 0) {
             grow = true;
-        else if (RECT_WIDHT >= 14)
+        }
+        else if (RECT_WIDHT >= 14) {
             grow = false;
+        }
     }
 
     public void rotateY() {
-        if (RECT_HEIGHT > 0 && !grow)
+        if (RECT_HEIGHT > 0 && !grow) {
             RECT_HEIGHT -= 0.178571f;
-        else if (RECT_HEIGHT < 25 && grow)
+            rectPos.y += 0.00085f;
+        }
+        else if (RECT_HEIGHT < 25 && grow) {
             RECT_HEIGHT += 0.178571f;
-        else if (RECT_HEIGHT <= 0)
+            rectPos.y -= 0.00085f;
+        }
+        else if (RECT_HEIGHT <= 0) {
             grow = true;
-        else if (RECT_HEIGHT >= 25)
+        }
+        else if (RECT_HEIGHT >= 25) {
             grow = false;
+        }
     }
 }
 

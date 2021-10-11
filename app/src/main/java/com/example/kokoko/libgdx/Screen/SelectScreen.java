@@ -3,8 +3,8 @@ package com.example.kokoko.libgdx.Screen;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,35 +15,35 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.example.kokoko.Constant;
 import com.example.kokoko.libgdx.AbstractScreens;
+import com.example.kokoko.libgdx.Background;
 import com.example.kokoko.libgdx.GameClass;
 
 /**Classe per selezionare il livello*/
 public class SelectScreen extends AbstractScreens implements Screen {
 
     public GameClass gameClass;
-    private Skin skin;
-    private OrthographicCamera camera;
-    private TextButton onlineButton;
-    private TextButton offlineButton;
-    private TextButton backButton;
-    private TextButton returnButton;
-    private TextButton prevButton;
-    private TextButton nextButton;
-    private TextButton continueButton;
-    private TextButton[] numberLevel;
-    private Label onlineLabel;
-    private Stage stage;
+    private final Skin skin;
+    private final OrthographicCamera camera;
+    private final TextButton onlineButton;
+    private final TextButton offlineButton;
+    private final TextButton backButton;
+    private final TextButton returnButton;
+    private final TextButton prevButton;
+    private final TextButton nextButton;
+    private final TextButton continueButton;
+    private final TextButton[] numberLevel;
+    private final Label onlineLabel;
+    private final Stage stage;
     private int moltiplicatore;
     private int numLvl;
     private boolean end;
-    private final Preferences prefs;
+    private final Background rectBK;
 
     public SelectScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
 
         skin = new Skin(Gdx.files.internal("skin.json"));
-        prefs = Gdx.app.getPreferences("Zawardo");
 
         onlineButton = new TextButton("Online", skin);
         offlineButton = new TextButton("Offline", skin);
@@ -55,10 +55,12 @@ public class SelectScreen extends AbstractScreens implements Screen {
         nextButton = new TextButton(Constant.NEXT_TEXT, skin);
         numberLevel = new TextButton[Constant.N_OF_LEVELS];
 
+        rectBK = new Background();
+
         for (int i = 0; i < Constant.N_OF_LEVELS; i++) {
             numberLevel[i] = new TextButton("" + (i + 1), skin);
             numberLevel[i].getLabel().setFontScale(3);
-            numberLevel[i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2 - 200, 200, 200);
+            numberLevel[i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 200, 200, 200);
         }
 
         moltiplicatore = 0;
@@ -103,7 +105,7 @@ public class SelectScreen extends AbstractScreens implements Screen {
         continueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gameClass.setNumLvl(gameClass.getnLvlMax() + 1);
+                GameClass.setNumLvl(GameClass.getnLvlMax() + 1);
                 gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
                 gameClass.setbSwitch(true);
             }
@@ -122,8 +124,8 @@ public class SelectScreen extends AbstractScreens implements Screen {
             numberLevel[i].addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (gameClass.getnLvlMax() >= finalI) {
-                        gameClass.setNumLvl(finalI + 1);
+                    if (GameClass.getnLvlMax() >= finalI) {
+                        GameClass.setNumLvl(finalI + 1);
                         gameClass.setsScreen(Constant.NumeroScreen.GAMESCREEN);
                         gameClass.setbSwitch(true);
                     }
@@ -175,29 +177,63 @@ public class SelectScreen extends AbstractScreens implements Screen {
         returnButton.getLabel().setFontScale(3);
         onlineLabel.setFontScale(6);
         // posizione tasti
-        onlineButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 + 100, 400, 200);
-        offlineButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 200, 400, 200);
-        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 500, 400, 200);
-        onlineLabel.setBounds(Gdx.graphics.getWidth() / 2 - 400, Gdx.graphics.getHeight() / 2 - 200, 400, 200);
-        continueButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 + 200, 400, 200);
-        returnButton.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2 - 425, 400, 150);
-        prevButton.setBounds(Gdx.graphics.getWidth() / 2 - 400, Gdx.graphics.getHeight() / 2 - 400, 100, 100);
-        nextButton.setBounds(Gdx.graphics.getWidth() / 2 + 300, Gdx.graphics.getHeight() / 2 - 400, 100, 100);
+        onlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 100, 400, 200);
+        offlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 200, 400, 200);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 500, 400, 200);
+        onlineLabel.setBounds(Gdx.graphics.getWidth() / 2f - 400, Gdx.graphics.getHeight() / 2f - 200, 400, 200);
+        continueButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 200, 400, 200);
+        returnButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 425, 400, 150);
+        prevButton.setBounds(Gdx.graphics.getWidth() / 2f - 400, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
+        nextButton.setBounds(Gdx.graphics.getWidth() / 2f + 300, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.9f, 0.2f, 0.1f, 1);
+        Gdx.gl.glClearColor(0.65f, 0.65f, 0.65f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        gameClass.batch.setProjectionMatrix(camera.combined);
+        GameClass.batch.setProjectionMatrix(camera.combined);
 
-        gameClass.batch.begin();
+        GameClass.batch.begin();
+        GameClass.batch.setColor(StringToColor(GameClass.getRectColor()));
+        rectBK.render(GameClass.batch);
+        GameClass.batch.setColor(Color.WHITE);
 
-        gameClass.batch.end();
+        GameClass.batch.end();
+
+        if (GameClass.isDynamicBkgrd()) {
+            rectBK.moveRect();
+            rectBK.resetRect();
+        } else
+            Log.i("MenuScreen SCREEN:" , "No movement");
+
+        if (GameClass.getBkgrndType()) {
+            rectBK.rotateYRect();
+            rectBK.rotateXRect();
+        } else
+            Log.i("MenuScreen SCREEN:" , "No rotation");
+
 
         stage.draw();
         stage.act();
+    }
+
+    private Color StringToColor(String s) {
+        switch (s) {
+            case "WHITE":
+                return Color.WHITE;
+            case "GOLD":
+                return Color.GOLD;
+            case "RED":
+                return Color.RED;
+            case "BLUE":
+                return Color.BLUE;
+            case "BLACK":
+                return Color.BLACK;
+            default:
+                return Color.WHITE;
+        }
+
     }
 
     private void changeView(int facciata) {
@@ -225,7 +261,7 @@ public class SelectScreen extends AbstractScreens implements Screen {
 
     private void changeButton(int numberButton) {
         for (int i = 0; i < Math.min(numLvl, Constant.LVLS_PER_PAGE); i++) {
-            numberLevel[numberButton + i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2 - 200, 200, 200);
+            numberLevel[numberButton + i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 200, 200, 200);
 
             if (numLvl <= Constant.NUM_FOR_PAGES) {
                 end = true;
