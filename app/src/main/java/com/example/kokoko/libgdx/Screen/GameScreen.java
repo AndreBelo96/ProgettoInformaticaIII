@@ -31,25 +31,25 @@ public class GameScreen extends AbstractScreens implements Screen {
     private static TextureAtlas atlas;
     //non-static variables
     public final GameClass gameClass;
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
     private Tilemap map;
     private boolean bool_switch;
     private boolean bool_win;
     private boolean bool_lose = true;
-    private Stage stage;
-    private Actor winActor;
-    private Actor loseActor;
+    private final Stage stage;
+    private final Actor winActor;
+    private final Actor loseActor;
     private Actor moveUpRightActor;
     private Actor moveUpLeftActor;
     private Actor moveBottomRightActor;
     private Actor moveBottomLeftActor;
-    private Background rectBK;
+    private final Background rectBK;
 
     public GameScreen(final GameClass gameClass) {
         this.gameClass = gameClass;
         atlas = new TextureAtlas("Asset_Proj.pack");
         camera = new OrthographicCamera(Constant.NUMERO_PIXEL_X, Constant.NUMERO_PIXEL_Y);
-        camera.position.set(Constant.TILE_WIDHT / 2, Constant.TILE_WIDHT / 2 + Constant.BORDER_HEIGHT, 0);
+        camera.position.set(Constant.TILE_WIDHT / 2f, Constant.TILE_WIDHT / 2f + Constant.BORDER_HEIGHT, 0);
         player = new Player(this, camera);
         map = new Tilemap(this.gameClass);
 

@@ -17,7 +17,7 @@ import com.example.kokoko.libgdx.Screen.ScoreboardScreen;
 import com.example.kokoko.libgdx.Screen.SelectScreen;
 import com.example.kokoko.libgdx.Screen.WinScreen;
 
-/** Classe per la creazione del game */
+/** Class to create the game */
 public class GameClass extends ApplicationAdapter {
     // Variable to call the user's stored preferences
     public static Preferences prefs;
@@ -74,7 +74,7 @@ public class GameClass extends ApplicationAdapter {
         super.resize(width, height);
     }
 
-    // Defines the method render enabling his esecution if the variable bSwitch is true; the delta time for the render function is hardcoded
+    // Defines the method render enabling his execution if the variable bSwitch is true; the delta time for the render function is hardcoded
     @Override
     public void render() {
         if (bSwitch) {

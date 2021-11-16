@@ -18,11 +18,10 @@ import com.example.kokoko.libgdx.AbstractScreens;
 import com.example.kokoko.libgdx.Background;
 import com.example.kokoko.libgdx.GameClass;
 
-/**Classe per selezionare il livello*/
+/**Class to select levels*/
 public class SelectScreen extends AbstractScreens implements Screen {
 
     public GameClass gameClass;
-    private final Skin skin;
     private final OrthographicCamera camera;
     private final TextButton onlineButton;
     private final TextButton offlineButton;
@@ -34,7 +33,7 @@ public class SelectScreen extends AbstractScreens implements Screen {
     private final TextButton[] numberLevel;
     private final Label onlineLabel;
     private final Stage stage;
-    private int moltiplicatore;
+    private int multiplier;
     private int numLvl;
     private boolean end;
     private final Background rectBK;
@@ -43,14 +42,14 @@ public class SelectScreen extends AbstractScreens implements Screen {
         this.gameClass = gameClass;
         camera = new OrthographicCamera();
 
-        skin = new Skin(Gdx.files.internal("skin.json"));
+        Skin skin = new Skin(Gdx.files.internal("skin.json"));
 
-        onlineButton = new TextButton("Online", skin);
-        offlineButton = new TextButton("Offline", skin);
+        onlineButton = new TextButton("Multiplayer", skin);
+        offlineButton = new TextButton("Campaign", skin);
         backButton = new TextButton(Constant.BACK_TEXT, skin);
         continueButton = new TextButton("Continue", skin);
         returnButton = new TextButton(Constant.BACK_TEXT, skin);
-        onlineLabel = new Label("Stiamo lavorando per voi", skin);
+        onlineLabel = new Label("We are working for you", skin);
         prevButton = new TextButton(Constant.PREVIOUS_TEXT, skin);
         nextButton = new TextButton(Constant.NEXT_TEXT, skin);
         numberLevel = new TextButton[Constant.N_OF_LEVELS];
@@ -60,10 +59,10 @@ public class SelectScreen extends AbstractScreens implements Screen {
         for (int i = 0; i < Constant.N_OF_LEVELS; i++) {
             numberLevel[i] = new TextButton("" + (i + 1), skin);
             numberLevel[i].getLabel().setFontScale(3);
-            numberLevel[i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 200, 200, 200);
+            numberLevel[i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 100, 150, 150);
         }
 
-        moltiplicatore = 0;
+        multiplier = 0;
         end = false;
         numLvl = Constant.N_OF_LEVELS;
 
@@ -137,15 +136,15 @@ public class SelectScreen extends AbstractScreens implements Screen {
         prevButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (moltiplicatore >= Constant.LVLS_PER_PAGE) {
+                if (multiplier >= Constant.LVLS_PER_PAGE) {
                     end = false;
                     numLvl += Constant.LVLS_PER_PAGE;
-                    moltiplicatore -= Constant.LVLS_PER_PAGE;
+                    multiplier -= Constant.LVLS_PER_PAGE;
                     stage.clear();
-                    changeButton(moltiplicatore);
+                    changeButton(multiplier);
                 }
                 else {
-                    Log.i("PREV", "PRIMA PAGINA");
+                    Log.i("PREV", "FIRST PAGE");
                 }
 
             }
@@ -156,12 +155,12 @@ public class SelectScreen extends AbstractScreens implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 if (!end) {
                     numLvl -= Constant.LVLS_PER_PAGE;
-                    moltiplicatore += Constant.LVLS_PER_PAGE;
+                    multiplier += Constant.LVLS_PER_PAGE;
                     stage.clear();
-                    changeButton(moltiplicatore);
+                    changeButton(multiplier);
                 }
                 else {
-                    Log.i("NEXT", "ULTIMA PAGINA");
+                    Log.i("NEXT", "LAST PAGE");
                 }
 
             }
@@ -169,20 +168,20 @@ public class SelectScreen extends AbstractScreens implements Screen {
     }
 
     private void setButtonPosition() {
-        // Grandezza font
+        // font size
         onlineButton.getLabel().setFontScale(3);
         offlineButton.getLabel().setFontScale(3);
         backButton.getLabel().setFontScale(3);
         continueButton.getLabel().setFontScale(3);
         returnButton.getLabel().setFontScale(3);
         onlineLabel.setFontScale(6);
-        // posizione tasti
-        onlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 100, 400, 200);
-        offlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 200, 400, 200);
-        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 500, 400, 200);
+        // positions
+        onlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 100, 400, 100);
+        offlineButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 100, 400, 100);
+        backButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 400, 400, 100);
         onlineLabel.setBounds(Gdx.graphics.getWidth() / 2f - 400, Gdx.graphics.getHeight() / 2f - 200, 400, 200);
-        continueButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 200, 400, 200);
-        returnButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 425, 400, 150);
+        continueButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 200, 400, 100);
+        returnButton.setBounds(Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f - 400, 400, 100);
         prevButton.setBounds(Gdx.graphics.getWidth() / 2f - 400, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
         nextButton.setBounds(Gdx.graphics.getWidth() / 2f + 300, Gdx.graphics.getHeight() / 2f - 400, 100, 100);
     }
@@ -231,7 +230,7 @@ public class SelectScreen extends AbstractScreens implements Screen {
             case "BLACK":
                 return Color.BLACK;
             default:
-                return Color.WHITE;
+                return Color.ORANGE;
         }
 
     }
@@ -261,7 +260,7 @@ public class SelectScreen extends AbstractScreens implements Screen {
 
     private void changeButton(int numberButton) {
         for (int i = 0; i < Math.min(numLvl, Constant.LVLS_PER_PAGE); i++) {
-            numberLevel[numberButton + i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 200, 200, 200);
+            numberLevel[numberButton + i].setBounds(200 + (i * 400), Gdx.graphics.getHeight() / 2f - 100, 150, 150);
 
             if (numLvl <= Constant.NUM_FOR_PAGES) {
                 end = true;

@@ -1,5 +1,7 @@
 package com.example.kokoko.libgdx;
 
+import android.util.Log;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,11 +34,9 @@ public class Player implements Entity {
     private Animation<TextureRegion> idle;
     private GameScreen screen;
     public float time;
-    private float animationMoveTime;
     private float timeControlVel;
     private boolean bool_move;
     private OrthographicCamera camera;
-    private boolean startAnimMove;
     private boolean canJump;
     
     // Variable for the player movement direction state
@@ -52,10 +52,8 @@ public class Player implements Entity {
         this.camera = camera;
         canJump = true;
         timeControlVel = 0;
-        animationMoveTime = 0;
         currentState = State.IDLE;
         previousState = State.IDLE;
-        startAnimMove = false;
         bool_move = false;
         // The animation frames are parsed from the sprite which cointains all the frames based on the x position
         frames = new Array<TextureRegion>();
@@ -89,10 +87,6 @@ public class Player implements Entity {
         }
 
         timeControlVel += delta;
-
-        if (startAnimMove) {
-            animationMoveTime += delta;
-        }
 
         if (timeControlVel <= (Constant.MOVE_TIME - 0.3f) && timeControlVel >= 0.3f && bool_move) {
 
@@ -136,8 +130,7 @@ public class Player implements Entity {
     }
 
     // Activates the state to enable movement and defines the movement direction in world axis
-    public int move(Constant.Direzioni dir) {
-        int returnVariable = 0;
+    public void move(Constant.Direzioni dir) {
         if (canJump && !currentState.equals(State.JUMPING)) {
             switch (dir) {
                 case TOPLEFT:
@@ -146,7 +139,6 @@ public class Player implements Entity {
                     timeControlVel = 0;
                     wasd = 1;
                     currentState = State.JUMPING;
-                    returnVariable = 1;
                     break;
                 case BOTTOMRIGHT:
                     bool_move = true;
@@ -154,7 +146,6 @@ public class Player implements Entity {
                     timeControlVel = 0;
                     wasd = 2;
                     currentState = State.JUMPING;
-                    returnVariable = 2;
                     break;
                 case BOTTOMLEFT:
                     bool_move = true;
@@ -162,7 +153,6 @@ public class Player implements Entity {
                     timeControlVel = 0;
                     wasd = 3;
                     currentState = State.JUMPING;
-                    returnVariable = 3;
                     break;
                 case TOPRIGHT:
                     bool_move = true;
@@ -170,13 +160,10 @@ public class Player implements Entity {
                     timeControlVel = 0;
                     wasd = 4;
                     currentState = State.JUMPING;
-                    returnVariable = 4;
                     break;
                 default:
             }
-
         }
-        return returnVariable;
     }
 
     // Standard getter for the variable worldPos
@@ -184,26 +171,27 @@ public class Player implements Entity {
         return this.worldPos;
     }
 
-    // Returns the region of the texture to use based on the kind of animation (idle or jumping) and the time
+    // Returns the region of the texture to use based on the kind of animation (idle or jumping) and the time problemi son 2 1) no tempo epr fare tutta amimazione 2)entro nel ciclo di nuvo pensando di aver premuto due volte con 1 click
     private TextureRegion setRegion(float delta_time) {
         final TextureRegion textureRegion;
         if (bool_move) {
-            if (animationMoveTime >= Constant.MOVE_TIME) {
+            previousState = State.JUMPING;
+            textureRegion = move.getKeyFrame(delta_time, true);
+            Log.i("BOOL MOVE","sono nell'if del move  bool_move: " + bool_move);
+
+            if (move.isAnimationFinished(delta_time)) {
                 bool_move = false;
                 canJump = true;
                 screen.setBoolSwitch(true);
                 previousState = State.JUMPING;
                 currentState = State.IDLE;
+                Log.i("IF ANIMATION MOVE","sono nell'if del move  bool_move: " + bool_move);
             }
-            previousState = State.JUMPING;
-            startAnimMove = true;
-            textureRegion = move.getKeyFrame(delta_time, true);
         }
         else {
-            animationMoveTime = 0;
-            startAnimMove = false;
             previousState = State.IDLE;
             textureRegion = idle.getKeyFrame(delta_time, true);
+            Log.i("IDLE ANIM","sono nell'if del Idle  bool_move: " + bool_move);
         }
         return textureRegion;
     }
